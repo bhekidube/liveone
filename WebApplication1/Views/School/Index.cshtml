@@ -1,0 +1,24 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<header class="masthead">
+    <section id="personCapture">
+@using (Html.BeginForm("Save", "School", FormMethod.Post))
+{
+        <div>
+            Name    <input type="text" name="Name" value="" /><br>
+            Surname <input type="text" name="Surname" value="" /><br>
+            DOB <input type="date" name="DOB"><br /><br />
+            Gender <input type="radio" name="gender" value="male" checked> Male
+            <input type="radio" name="gender" value="female"> Female<br>
+            Type<input type="radio" name="Persontype" value="Staff" checked> Staff
+            <input type="radio" name="Persontype" value="Student"> Student<br>
+            <input type="submit" value="Save" class="btn-primary">
+        </div>
+
+}</section>
+</header>
+
