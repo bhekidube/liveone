@@ -7,4 +7,3 @@ C:\Users\bhekid\Documents\GitHub\liveone\StudentData\bin\Debug\EntityFramework.d
 C:\Users\bhekid\Documents\GitHub\liveone\StudentData\bin\Debug\EntityFramework.SqlServer.dll
 C:\Users\bhekid\Documents\GitHub\liveone\StudentData\bin\Debug\EntityFramework.xml
 C:\Users\bhekid\Documents\GitHub\liveone\StudentData\bin\Debug\EntityFramework.SqlServer.xml
-C:\Users\bhekid\Documents\GitHub\liveone\StudentData\obj\Debug\PersonData.csprojResolveAssemblyReference.cache

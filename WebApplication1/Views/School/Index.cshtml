@@ -29,15 +29,12 @@
                 <td>@element.Name</td>
                 <td>@element.Surname</td>
                 <td>
-                    @Html.ActionLink("Delete",
-                "Delete",
-                  "School",   // <-- ActionMethod
-                   new { element.PersonNo }, // <-- Route arguments.
-                    null  // <-- htmlArguments .. which are none. You need this value
-                          //     otherwise you call the WRONG method ...
-                )
-            </td>
-        </tr>
+                    @Html.ActionLink("Remove", "Delete", "School", new { element.PersonNo }, null)
+                </td>
+                <td>
+                    @Html.ActionLink("Change", "Update", "School", new { element.PersonNo,element.Name,element.Surname }, null)
+                </td>
+            </tr>
         }
     </table>
 </header>

@@ -36,5 +36,14 @@ namespace WebApplication1.Controllers
             // Get everyone ....used not 456
             return unitOfWork.PersonRepository.Find(x => x.Name != "456");
         }
+
+        public ActionResult Update(PersonModel person)
+        {
+            Person PersonToUpdate = unitOfWork.PersonRepository.FindBy(x => x.PersonNo == person.PersonNo);
+            PersonToUpdate.Name = person.Name + " get from form";
+            PersonToUpdate.Surname = person.Name + " get from form";
+            unitOfWork.Save();
+            return View("Index", ListOfPersons());
+        }
     }
 }
