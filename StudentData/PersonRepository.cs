@@ -1,10 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data.Entity.Core.Objects;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
-using StudentData;
 
 namespace PersonData
 {
@@ -26,8 +24,15 @@ namespace PersonData
         public void Remove(TEntity entity) {
             _objectSet.DeleteObject(entity);
         }
-        public IQueryable<TEntity> Find(Expression<Func<TEntity, bool>> predicate) {
+        public IEnumerable<TEntity> Find(Expression<Func<TEntity, bool>> predicate) {
             return _objectSet.Where(predicate);
+        }// IQueryable - lets u compose queries VS IEnumerable
+         /* "Expression<Func<TEntity, bool>> predicate" means the caller will provide a lambda 
+          * expression based on the TEntity type, and this expression will return a Boolean value
+         */
+        public TEntity FindBy(Expression<Func<TEntity, bool>> predicate)
+        {
+            return _objectSet.Where(predicate).FirstOrDefault();
         }// IQueryable - lets u compose queries VS IEnumerable
          /* "Expression<Func<TEntity, bool>> predicate" means the caller will provide a lambda 
           * expression based on the TEntity type, and this expression will return a Boolean value
@@ -39,7 +44,7 @@ namespace PersonData
     {
         void Add(TEntity newEntity);
         void Remove(TEntity entity);
-        IQueryable<TEntity> Find(Expression<Func<TEntity, bool>> predicate);// IQueryable - lets u compose queries VS IEnumerable
+        IEnumerable<TEntity> Find(Expression<Func<TEntity, bool>> predicate);// IQueryable - lets u compose queries VS IEnumerable
     }
 
 

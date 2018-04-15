@@ -1,6 +1,5 @@
 C:\Users\bhekid\Documents\GitHub\liveone\StudentData\bin\Debug\StudentData.dll
 C:\Users\bhekid\Documents\GitHub\liveone\StudentData\bin\Debug\StudentData.pdb
-C:\Users\bhekid\Documents\GitHub\liveone\StudentData\obj\Debug\PersonData.csprojResolveAssemblyReference.cache
 C:\Users\bhekid\Documents\GitHub\liveone\StudentData\obj\Debug\StudentData.dll
 C:\Users\bhekid\Documents\GitHub\liveone\StudentData\obj\Debug\StudentData.pdb
 C:\Users\bhekid\Documents\GitHub\liveone\StudentData\bin\Debug\StudentData.dll.config
@@ -8,3 +7,4 @@ C:\Users\bhekid\Documents\GitHub\liveone\StudentData\bin\Debug\EntityFramework.d
 C:\Users\bhekid\Documents\GitHub\liveone\StudentData\bin\Debug\EntityFramework.SqlServer.dll
 C:\Users\bhekid\Documents\GitHub\liveone\StudentData\bin\Debug\EntityFramework.xml
 C:\Users\bhekid\Documents\GitHub\liveone\StudentData\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\bhekid\Documents\GitHub\liveone\StudentData\obj\Debug\PersonData.csprojResolveAssemblyReference.cache
