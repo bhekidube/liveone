@@ -25,6 +25,9 @@ namespace StudentData
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<Gender> Genders { get; set; }
+        public virtual DbSet<IDType> IDTypes { get; set; }
         public virtual DbSet<Person> People { get; set; }
+        public virtual DbSet<PersonType> PersonTypes { get; set; }
     }
 }

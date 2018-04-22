@@ -8,6 +8,8 @@ namespace StudentData.Custom
     {
         private IObjectContextAdapter _context = new InstituteEntities();
         private GenericRepository<Person> _personRepository;
+        private GenericRepository<PersonType> _personTypeRepository;
+        private GenericRepository<IDType> _idTypeRepository;
 
         public GenericRepository<Person> PersonRepository
         {
@@ -20,7 +22,28 @@ namespace StudentData.Custom
                 return _personRepository;
             }
         }
-
+        public GenericRepository<PersonType> PersonTypeRepository
+        {
+            get
+            {
+                if (_personTypeRepository == null)
+                {
+                    _personTypeRepository = new GenericRepository<PersonType>(_context.ObjectContext);
+                }
+                return _personTypeRepository;
+            }
+        }
+        public GenericRepository<IDType> IdTypeRepository
+        {
+            get
+            {
+                if (_idTypeRepository == null)
+                {
+                    _idTypeRepository = new GenericRepository<IDType>(_context.ObjectContext);
+                }
+                return _idTypeRepository;
+            }
+        }
         public void Save()
         {
             _context.ObjectContext.SaveChanges();

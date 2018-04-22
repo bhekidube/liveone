@@ -12,15 +12,9 @@ namespace StudentData
     using System;
     using System.Collections.Generic;
     
-    public partial class Person
+    public partial class IDType
     {
-        public int PersonNo { get; set; }
-        public int PersonTypeNo { get; set; }
-        public int IdTypeNo { get; set; }
-        public string IdNo { get; set; }
-        public string Name { get; set; }
-        public string Surname { get; set; }
-        public int GenderNo { get; set; }
-        public System.DateTime DOB { get; set; }
+        public int IDTypeNo { get; set; }
+        public string IDTypeDesc { get; set; }
     }
 }

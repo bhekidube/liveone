@@ -1,14 +1,43 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="InstituteModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Gender">
+    <Key>
+      <PropertyRef Name="GenderNo" />
+    </Key>
+    <Property Name="GenderNo" Type="int" Nullable="false" />
+    <Property Name="GenderDesc" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="IDType">
+    <Key>
+      <PropertyRef Name="IDTypeNo" />
+    </Key>
+    <Property Name="IDTypeNo" Type="int" Nullable="false" />
+    <Property Name="IDTypeDesc" Type="nvarchar" MaxLength="50" />
+  </EntityType>
   <EntityType Name="Person">
     <Key>
       <PropertyRef Name="PersonNo" />
     </Key>
     <Property Name="PersonNo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Name" Type="nvarchar(max)" />
-    <Property Name="Surname" Type="nvarchar" MaxLength="50" />
+    <Property Name="PersonTypeNo" Type="int" Nullable="false" />
+    <Property Name="IdTypeNo" Type="int" Nullable="false" />
+    <Property Name="IdNo" Type="nvarchar" MaxLength="20" />
+    <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Surname" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="GenderNo" Type="int" Nullable="false" />
+    <Property Name="DOB" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="PersonType">
+    <Key>
+      <PropertyRef Name="PersonTypeNo" />
+    </Key>
+    <Property Name="PersonTypeNo" Type="int" Nullable="false" />
+    <Property Name="PersonTypeDesc" Type="nvarchar" MaxLength="50" />
   </EntityType>
   <EntityContainer Name="InstituteModelStoreContainer">
+    <EntitySet Name="Gender" EntityType="Self.Gender" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="IDType" EntityType="Self.IDType" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Person" EntityType="Self.Person" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PersonType" EntityType="Self.PersonType" Schema="dbo" store:Type="Tables" />
   </EntityContainer>
 </Schema>

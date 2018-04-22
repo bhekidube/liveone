@@ -5,44 +5,131 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="InstituteModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Gender">
+          <Key>
+            <PropertyRef Name="GenderNo" />
+          </Key>
+          <Property Name="GenderNo" Type="int" Nullable="false" />
+          <Property Name="GenderDesc" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="IDType">
+          <Key>
+            <PropertyRef Name="IDTypeNo" />
+          </Key>
+          <Property Name="IDTypeNo" Type="int" Nullable="false" />
+          <Property Name="IDTypeDesc" Type="nvarchar" MaxLength="50" />
+        </EntityType>
         <EntityType Name="Person">
           <Key>
             <PropertyRef Name="PersonNo" />
           </Key>
           <Property Name="PersonNo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Name" Type="nvarchar(max)" />
-          <Property Name="Surname" Type="nvarchar" MaxLength="50" />
+          <Property Name="PersonTypeNo" Type="int" Nullable="false" />
+          <Property Name="IdTypeNo" Type="int" Nullable="false" />
+          <Property Name="IdNo" Type="nvarchar" MaxLength="20" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Surname" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="GenderNo" Type="int" Nullable="false" />
+          <Property Name="DOB" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PersonType">
+          <Key>
+            <PropertyRef Name="PersonTypeNo" />
+          </Key>
+          <Property Name="PersonTypeNo" Type="int" Nullable="false" />
+          <Property Name="PersonTypeDesc" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityContainer Name="InstituteModelStoreContainer">
+          <EntitySet Name="Gender" EntityType="Self.Gender" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="IDType" EntityType="Self.IDType" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Person" EntityType="Self.Person" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PersonType" EntityType="Self.PersonType" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="InstituteModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="InstituteEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Genders" EntityType="InstituteModel.Gender" />
+          <EntitySet Name="IDTypes" EntityType="InstituteModel.IDType" />
+          <EntitySet Name="People" EntityType="InstituteModel.Person" />
+          <EntitySet Name="PersonTypes" EntityType="InstituteModel.PersonType" />
+        </EntityContainer>
+        <EntityType Name="Gender">
+          <Key>
+            <PropertyRef Name="GenderNo" />
+          </Key>
+          <Property Name="GenderNo" Type="Int32" Nullable="false" />
+          <Property Name="GenderDesc" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="IDType">
+          <Key>
+            <PropertyRef Name="IDTypeNo" />
+          </Key>
+          <Property Name="IDTypeNo" Type="Int32" Nullable="false" />
+          <Property Name="IDTypeDesc" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
         <EntityType Name="Person">
           <Key>
             <PropertyRef Name="PersonNo" />
           </Key>
           <Property Name="PersonNo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Surname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PersonTypeNo" Type="Int32" Nullable="false" />
+          <Property Name="IdTypeNo" Type="Int32" Nullable="false" />
+          <Property Name="IdNo" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Surname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="GenderNo" Type="Int32" Nullable="false" />
+          <Property Name="DOB" Type="DateTime" Nullable="false" Precision="3" />
         </EntityType>
-        <EntityContainer Name="InstituteEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="People" EntityType="Self.Person" />
-        </EntityContainer>
+        <EntityType Name="PersonType">
+          <Key>
+            <PropertyRef Name="PersonTypeNo" />
+          </Key>
+          <Property Name="PersonTypeNo" Type="Int32" Nullable="false" />
+          <Property Name="PersonTypeDesc" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="InstituteModelStoreContainer" CdmEntityContainer="InstituteEntities">
+          <EntitySetMapping Name="Genders">
+            <EntityTypeMapping TypeName="InstituteModel.Gender">
+              <MappingFragment StoreEntitySet="Gender">
+                <ScalarProperty Name="GenderDesc" ColumnName="GenderDesc" />
+                <ScalarProperty Name="GenderNo" ColumnName="GenderNo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="IDTypes">
+            <EntityTypeMapping TypeName="InstituteModel.IDType">
+              <MappingFragment StoreEntitySet="IDType">
+                <ScalarProperty Name="IDTypeDesc" ColumnName="IDTypeDesc" />
+                <ScalarProperty Name="IDTypeNo" ColumnName="IDTypeNo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="People">
             <EntityTypeMapping TypeName="InstituteModel.Person">
               <MappingFragment StoreEntitySet="Person">
-                <ScalarProperty Name="PersonNo" ColumnName="PersonNo" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="DOB" ColumnName="DOB" />
+                <ScalarProperty Name="GenderNo" ColumnName="GenderNo" />
                 <ScalarProperty Name="Surname" ColumnName="Surname" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="IdNo" ColumnName="IdNo" />
+                <ScalarProperty Name="IdTypeNo" ColumnName="IdTypeNo" />
+                <ScalarProperty Name="PersonTypeNo" ColumnName="PersonTypeNo" />
+                <ScalarProperty Name="PersonNo" ColumnName="PersonNo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PersonTypes">
+            <EntityTypeMapping TypeName="InstituteModel.PersonType">
+              <MappingFragment StoreEntitySet="PersonType">
+                <ScalarProperty Name="PersonTypeDesc" ColumnName="PersonTypeDesc" />
+                <ScalarProperty Name="PersonTypeNo" ColumnName="PersonTypeNo" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

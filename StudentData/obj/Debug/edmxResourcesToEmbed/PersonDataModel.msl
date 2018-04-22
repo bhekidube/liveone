@@ -1,12 +1,41 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
   <EntityContainerMapping StorageEntityContainer="InstituteModelStoreContainer" CdmEntityContainer="InstituteEntities">
+    <EntitySetMapping Name="Genders">
+      <EntityTypeMapping TypeName="InstituteModel.Gender">
+        <MappingFragment StoreEntitySet="Gender">
+          <ScalarProperty Name="GenderDesc" ColumnName="GenderDesc" />
+          <ScalarProperty Name="GenderNo" ColumnName="GenderNo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="IDTypes">
+      <EntityTypeMapping TypeName="InstituteModel.IDType">
+        <MappingFragment StoreEntitySet="IDType">
+          <ScalarProperty Name="IDTypeDesc" ColumnName="IDTypeDesc" />
+          <ScalarProperty Name="IDTypeNo" ColumnName="IDTypeNo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="People">
       <EntityTypeMapping TypeName="InstituteModel.Person">
         <MappingFragment StoreEntitySet="Person">
-          <ScalarProperty Name="PersonNo" ColumnName="PersonNo" />
-          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="DOB" ColumnName="DOB" />
+          <ScalarProperty Name="GenderNo" ColumnName="GenderNo" />
           <ScalarProperty Name="Surname" ColumnName="Surname" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="IdNo" ColumnName="IdNo" />
+          <ScalarProperty Name="IdTypeNo" ColumnName="IdTypeNo" />
+          <ScalarProperty Name="PersonTypeNo" ColumnName="PersonTypeNo" />
+          <ScalarProperty Name="PersonNo" ColumnName="PersonNo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PersonTypes">
+      <EntityTypeMapping TypeName="InstituteModel.PersonType">
+        <MappingFragment StoreEntitySet="PersonType">
+          <ScalarProperty Name="PersonTypeDesc" ColumnName="PersonTypeDesc" />
+          <ScalarProperty Name="PersonTypeNo" ColumnName="PersonTypeNo" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

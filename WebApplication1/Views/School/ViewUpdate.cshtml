@@ -1,0 +1,38 @@
+﻿@model WebApplication1.Models.PersonModelEdit
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<header class="masthead">
+    <section id="personCapture">
+        @using (Html.BeginForm("Update", "School", FormMethod.Post))
+            {
+            <div>
+                <input type="hidden" name="PersonNo" value=@Model.PersonNo />
+                Name    <input type="text" name="Name" value=@Model.Name /><br>
+                Surname <input type="text" name="Surname" value=@Model.Surname /><br>
+                DOB @Html.TextBoxFor(model => model.DOB,
+                    new { @type = "date", @Value = Model.DOB.ToString("yyyy-MM-dd") })
+                <div class="form-group">
+                    <div>
+                        Person Type
+                        @Html.DropDownListFor(model => model.PersonType, new SelectList(Model.PersonTypes, "PersonTypeNo", "PersonTypeDesc", "-- Select Person Type --"))
+                    </div>
+                    <div>
+                        ID Type
+                        @Html.DropDownListFor(model => model.IDType, new SelectList(Model.IDTypes, "IDTypeNo", "IDTypeDesc", "-- Select ID Type --"))
+                    </div>
+                    ID number <input type="text" name="ID" value=@Model.ID /><br /><br />
+                    Gender <input type="radio" name="Gender" value="1" checked> Male
+                    <input type="radio" name="Gender" value="2"> Female<br>
+                    <input type="submit" value="Save changes" class="btn-primary">
+                </div>
+            </div>
+        }
+    </section>
+
+
+
+
