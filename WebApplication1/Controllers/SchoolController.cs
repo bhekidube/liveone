@@ -48,6 +48,8 @@ namespace WebApplication1.Controllers
                 Person PersonToUpdate = unitOfWork.PersonRepository.FindBy(x => x.PersonNo == person.PersonNo);
                 IEnumerable<StudentData.IDType> IDtypes = unitOfWork.IdTypeRepository.Find(x => x.IDTypeDesc != "456");
                 IEnumerable<StudentData.PersonType> PersonTypes = unitOfWork.PersonTypeRepository.Find(x => x.PersonTypeDesc != "456");
+                IEnumerable<StudentData.GroupType> GroupTypes = unitOfWork.GroupTypeRepository.Find(x => x.GroupTypeDesc != "456");
+                IEnumerable<StudentData.Group> Group = unitOfWork.GroupRepository.Find(x => x.GroupDesc != "456");
 
                 List<Models.PersonType> ps = new List<Models.PersonType>();
                 foreach (var PersonType in PersonTypes)
@@ -61,6 +63,18 @@ namespace WebApplication1.Controllers
                     idtps.Add(new Models.IDType() { IDTypeNo = idtype.IDTypeNo, IDTypeDesc = idtype.IDTypeDesc });
                 }
 
+                List<Models.GroupType> groupTypes = new List<Models.GroupType>();
+                foreach (var gtype in GroupTypes)
+                {
+                    groupTypes.Add(new Models.GroupType() { GroupTypeNo = gtype.GroupTypeNo, GroupTypeDesc = gtype.GroupTypeDesc });
+                }
+
+                List<Models.Group> groups = new List<Models.Group>();
+                foreach (var g in Group)
+                {
+                    groups.Add(new Models.Group() { GroupNo = g.GroupNo, GroupDesc = g.GroupDesc });
+                }
+
                 PersonModelEdit personmodel = new PersonModelEdit()
                 { PersonNo = PersonToUpdate.PersonNo,
                     Name = PersonToUpdate.Name,
@@ -71,7 +85,9 @@ namespace WebApplication1.Controllers
                     PersonType = PersonToUpdate.PersonTypeNo,
                     DOB = PersonToUpdate.DOB,
                     PersonTypes = ps,
-                    IDTypes = idtps
+                    IDTypes = idtps,
+                    GroupTypes = groupTypes,
+                    Groups = groups
                 };
                 return View("ViewUpdate", personmodel);
             }

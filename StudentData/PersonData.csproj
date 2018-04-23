@@ -55,6 +55,12 @@
     <Compile Include="Gender.cs">
       <DependentUpon>PersonDataModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Group.cs">
+      <DependentUpon>PersonDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GroupType.cs">
+      <DependentUpon>PersonDataModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="IDType.cs">
       <DependentUpon>PersonDataModel.tt</DependentUpon>
     </Compile>
@@ -81,6 +87,15 @@
       <DependentUpon>PersonDataModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="User.cs">
+      <DependentUpon>PersonDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Work.cs">
+      <DependentUpon>PersonDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="WorkType.cs">
+      <DependentUpon>PersonDataModel.tt</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <EntityDeploy Include="PersonDataModel.edmx">

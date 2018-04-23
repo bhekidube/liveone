@@ -29,5 +29,10 @@ namespace StudentData
         public virtual DbSet<IDType> IDTypes { get; set; }
         public virtual DbSet<Person> People { get; set; }
         public virtual DbSet<PersonType> PersonTypes { get; set; }
+        public virtual DbSet<GroupType> GroupTypes { get; set; }
+        public virtual DbSet<User> Users { get; set; }
+        public virtual DbSet<Work> Works { get; set; }
+        public virtual DbSet<WorkType> WorkTypes { get; set; }
+        public virtual DbSet<Group> Groups { get; set; }
     }
 }

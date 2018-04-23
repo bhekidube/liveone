@@ -7,6 +7,27 @@
     <Property Name="GenderNo" Type="int" Nullable="false" />
     <Property Name="GenderDesc" Type="nvarchar" MaxLength="50" />
   </EntityType>
+  <EntityType Name="Group">
+    <Key>
+      <PropertyRef Name="GroupNo" />
+    </Key>
+    <Property Name="GroupNo" Type="int" Nullable="false" />
+    <Property Name="GroupTypeNo" Type="int" />
+    <Property Name="GroupPersonNo" Type="int" />
+    <Property Name="GroupDesc" Type="nvarchar" MaxLength="100" />
+    <Property Name="StartDate" Type="datetime" />
+    <Property Name="EndDate" Type="datetime" />
+    <Property Name="SystemDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="GroupType">
+    <Key>
+      <PropertyRef Name="GroupTypeNo" />
+    </Key>
+    <Property Name="GroupTypeNo" Type="int" Nullable="false" />
+    <Property Name="GroupTypeDesc" Type="nvarchar" MaxLength="50" />
+    <Property Name="SystemDate" Type="datetime" />
+    <Property Name="CreatedBy" Type="nvarchar" MaxLength="50" />
+  </EntityType>
   <EntityType Name="IDType">
     <Key>
       <PropertyRef Name="IDTypeNo" />
@@ -26,6 +47,7 @@
     <Property Name="Surname" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="GenderNo" Type="int" Nullable="false" />
     <Property Name="DOB" Type="datetime" Nullable="false" />
+    <Property Name="SystemDate" Type="datetime" />
   </EntityType>
   <EntityType Name="PersonType">
     <Key>
@@ -33,11 +55,46 @@
     </Key>
     <Property Name="PersonTypeNo" Type="int" Nullable="false" />
     <Property Name="PersonTypeDesc" Type="nvarchar" MaxLength="50" />
+    <Property Name="SystemDate" Type="datetime" />
+    <Property Name="CreatedBy" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="UserNo" />
+    </Key>
+    <Property Name="UserNo" Type="nchar" MaxLength="10" Nullable="false" />
+    <Property Name="UserName" Type="nvarchar" MaxLength="50" />
+    <Property Name="UserPassword" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Work">
+    <Key>
+      <PropertyRef Name="WorkNo" />
+    </Key>
+    <Property Name="WorkNo" Type="int" Nullable="false" />
+    <Property Name="WorkDesc" Type="nvarchar" MaxLength="50" />
+    <Property Name="WorkTypeNo" Type="int" />
+    <Property Name="GroupNo" Type="int" />
+    <Property Name="PersonNo" Type="int" />
+    <Property Name="GroupNameStartDate" Type="datetime" />
+    <Property Name="GroupNameEndDate" Type="datetime" />
+    <Property Name="SystemDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="WorkType">
+    <Key>
+      <PropertyRef Name="WorkTypeNo" />
+    </Key>
+    <Property Name="WorkTypeNo" Type="int" Nullable="false" />
+    <Property Name="WorkTypeDesc" Type="nvarchar" MaxLength="50" />
   </EntityType>
   <EntityContainer Name="InstituteModelStoreContainer">
     <EntitySet Name="Gender" EntityType="Self.Gender" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Group" EntityType="Self.Group" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="GroupType" EntityType="Self.GroupType" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="IDType" EntityType="Self.IDType" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Person" EntityType="Self.Person" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="PersonType" EntityType="Self.PersonType" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Work" EntityType="Self.Work" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="WorkType" EntityType="Self.WorkType" Schema="dbo" store:Type="Tables" />
   </EntityContainer>
 </Schema>

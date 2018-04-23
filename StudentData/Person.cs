@@ -22,5 +22,6 @@ namespace StudentData
         public string Surname { get; set; }
         public int GenderNo { get; set; }
         public System.DateTime DOB { get; set; }
+        public Nullable<System.DateTime> SystemDate { get; set; }
     }
 }

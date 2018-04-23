@@ -12,11 +12,15 @@ namespace StudentData
     using System;
     using System.Collections.Generic;
     
-    public partial class PersonType
+    public partial class Work
     {
-        public int PersonTypeNo { get; set; }
-        public string PersonTypeDesc { get; set; }
+        public int WorkNo { get; set; }
+        public string WorkDesc { get; set; }
+        public Nullable<int> WorkTypeNo { get; set; }
+        public Nullable<int> GroupNo { get; set; }
+        public Nullable<int> PersonNo { get; set; }
+        public Nullable<System.DateTime> GroupNameStartDate { get; set; }
+        public Nullable<System.DateTime> GroupNameEndDate { get; set; }
         public Nullable<System.DateTime> SystemDate { get; set; }
-        public string CreatedBy { get; set; }
     }
 }

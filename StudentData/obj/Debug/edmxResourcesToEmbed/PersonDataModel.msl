@@ -20,6 +20,7 @@
     <EntitySetMapping Name="People">
       <EntityTypeMapping TypeName="InstituteModel.Person">
         <MappingFragment StoreEntitySet="Person">
+          <ScalarProperty Name="SystemDate" ColumnName="SystemDate" />
           <ScalarProperty Name="DOB" ColumnName="DOB" />
           <ScalarProperty Name="GenderNo" ColumnName="GenderNo" />
           <ScalarProperty Name="Surname" ColumnName="Surname" />
@@ -34,8 +35,64 @@
     <EntitySetMapping Name="PersonTypes">
       <EntityTypeMapping TypeName="InstituteModel.PersonType">
         <MappingFragment StoreEntitySet="PersonType">
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="SystemDate" ColumnName="SystemDate" />
           <ScalarProperty Name="PersonTypeDesc" ColumnName="PersonTypeDesc" />
           <ScalarProperty Name="PersonTypeNo" ColumnName="PersonTypeNo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="GroupTypes">
+      <EntityTypeMapping TypeName="InstituteModel.GroupType">
+        <MappingFragment StoreEntitySet="GroupType">
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="SystemDate" ColumnName="SystemDate" />
+          <ScalarProperty Name="GroupTypeDesc" ColumnName="GroupTypeDesc" />
+          <ScalarProperty Name="GroupTypeNo" ColumnName="GroupTypeNo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Users">
+      <EntityTypeMapping TypeName="InstituteModel.User">
+        <MappingFragment StoreEntitySet="User">
+          <ScalarProperty Name="UserPassword" ColumnName="UserPassword" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="UserNo" ColumnName="UserNo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Works">
+      <EntityTypeMapping TypeName="InstituteModel.Work">
+        <MappingFragment StoreEntitySet="Work">
+          <ScalarProperty Name="SystemDate" ColumnName="SystemDate" />
+          <ScalarProperty Name="GroupNameEndDate" ColumnName="GroupNameEndDate" />
+          <ScalarProperty Name="GroupNameStartDate" ColumnName="GroupNameStartDate" />
+          <ScalarProperty Name="PersonNo" ColumnName="PersonNo" />
+          <ScalarProperty Name="GroupNo" ColumnName="GroupNo" />
+          <ScalarProperty Name="WorkTypeNo" ColumnName="WorkTypeNo" />
+          <ScalarProperty Name="WorkDesc" ColumnName="WorkDesc" />
+          <ScalarProperty Name="WorkNo" ColumnName="WorkNo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="WorkTypes">
+      <EntityTypeMapping TypeName="InstituteModel.WorkType">
+        <MappingFragment StoreEntitySet="WorkType">
+          <ScalarProperty Name="WorkTypeDesc" ColumnName="WorkTypeDesc" />
+          <ScalarProperty Name="WorkTypeNo" ColumnName="WorkTypeNo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Groups">
+      <EntityTypeMapping TypeName="InstituteModel.Group">
+        <MappingFragment StoreEntitySet="Group">
+          <ScalarProperty Name="SystemDate" ColumnName="SystemDate" />
+          <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+          <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+          <ScalarProperty Name="GroupDesc" ColumnName="GroupDesc" />
+          <ScalarProperty Name="GroupPersonNo" ColumnName="GroupPersonNo" />
+          <ScalarProperty Name="GroupTypeNo" ColumnName="GroupTypeNo" />
+          <ScalarProperty Name="GroupNo" ColumnName="GroupNo" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

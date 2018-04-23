@@ -10,6 +10,10 @@ namespace StudentData.Custom
         private GenericRepository<Person> _personRepository;
         private GenericRepository<PersonType> _personTypeRepository;
         private GenericRepository<IDType> _idTypeRepository;
+        private GenericRepository<GroupType> _groupTypeRepository;
+        private GenericRepository<Group> _groupRepository;
+        private GenericRepository<Work> _workRepository;
+        private GenericRepository<WorkType> _workTypeRepository;
 
         public GenericRepository<Person> PersonRepository
         {
@@ -42,6 +46,52 @@ namespace StudentData.Custom
                     _idTypeRepository = new GenericRepository<IDType>(_context.ObjectContext);
                 }
                 return _idTypeRepository;
+            }
+        }
+
+        public GenericRepository<GroupType> GroupTypeRepository
+        {
+            get
+            {
+                if (_groupTypeRepository == null)
+                {
+                    _groupTypeRepository = new GenericRepository<GroupType>(_context.ObjectContext);
+                }
+                return _groupTypeRepository;
+            }
+        }
+        public GenericRepository<Group> GroupRepository
+        {
+            get
+            {
+                if (_groupRepository == null)
+                {
+                    _groupRepository = new GenericRepository<Group>(_context.ObjectContext);
+                }
+                return _groupRepository;
+            }
+        }
+
+        public GenericRepository<Work> WorkRepository
+        {
+            get
+            {
+                if (_workRepository == null)
+                {
+                    _workRepository = new GenericRepository<Work>(_context.ObjectContext);
+                }
+                return _workRepository;
+            }
+        }
+        public GenericRepository<WorkType> WorTypekRepository
+        {
+            get
+            {
+                if (_workTypeRepository == null)
+                {
+                    _workTypeRepository = new GenericRepository<WorkType>(_context.ObjectContext);
+                }
+                return _workTypeRepository;
             }
         }
         public void Save()
