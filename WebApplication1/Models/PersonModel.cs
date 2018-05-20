@@ -20,7 +20,8 @@ namespace WebApplication1.Models
         public IEnumerable<PersonType> PersonTypes { get; set; }
         public IEnumerable<IDType> IDTypes { get; set; }
         public IEnumerable<GroupType> GroupTypes { get; set; }
-        public IEnumerable<Group> Groups { get; set; }
+        public IEnumerable<GroupEdit> Groups { get; set; }
+        public bool AddToGroup{get;set;}
 
     }
 
@@ -42,15 +43,16 @@ namespace WebApplication1.Models
         public int CreatedBy { get; set; }
     }
 
-    public class Group
+    public class GroupEdit
     {
         public int GroupNo { get; set; }
-        public int GroupTypeNo { get; set; }
+        public int GroupType { get; set; }
         public int GroupPersonNo { get; set; }
         public string GroupDesc { get; set; }
-        public DateTime GroupNameStartDate { get; set; }
-        public DateTime GroupNameEndDate { get; set; }
+        public DateTime StartDate { get; set; }
+        public DateTime EndDate { get; set; }
         public DateTime SystemDate { get; set; }
+        public IEnumerable<GroupType> GroupTypes { get; set; }
     }
 
 

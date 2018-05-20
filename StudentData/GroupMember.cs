@@ -12,14 +12,11 @@ namespace StudentData
     using System;
     using System.Collections.Generic;
     
-    public partial class Group
+    public partial class GroupMember
     {
+        public int GroupMemberNo { get; set; }
+        public int GroupMemberPersonNo { get; set; }
         public int GroupNo { get; set; }
-        public int GroupTypeNo { get; set; }
-        public int GroupPersonNo { get; set; }
-        public string GroupDesc { get; set; }
-        public System.DateTime StartDate { get; set; }
-        public System.DateTime EndDate { get; set; }
         public Nullable<System.DateTime> SystemDate { get; set; }
     }
 }

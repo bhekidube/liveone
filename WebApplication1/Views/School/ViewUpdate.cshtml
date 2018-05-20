@@ -28,7 +28,8 @@
                     Gender <input type="radio" name="Gender" value="1" checked> Male
                     <input type="radio" name="Gender" value="2"> Female<br>
                     <input type="submit" value="Save changes" class="btn-primary"><br /><br />
-                    <input type="submit" value="Add to group" class="btn-primary">
+                    @*<input type="submit" value="Add to group" class="btn-primary">*@
+                    @Html.EditorFor(model => model.AddToGroup)
                     @Html.DropDownListFor(model => model.Group, new SelectList(Model.Groups, "GroupNo", "GroupDesc", "-- Select Group Type --"))
                 </div>
             </div>

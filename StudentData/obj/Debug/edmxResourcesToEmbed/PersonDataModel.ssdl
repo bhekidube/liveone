@@ -11,12 +11,21 @@
     <Key>
       <PropertyRef Name="GroupNo" />
     </Key>
+    <Property Name="GroupNo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="GroupTypeNo" Type="int" Nullable="false" />
+    <Property Name="GroupPersonNo" Type="int" Nullable="false" />
+    <Property Name="GroupDesc" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="StartDate" Type="datetime" Nullable="false" />
+    <Property Name="EndDate" Type="datetime" Nullable="false" />
+    <Property Name="SystemDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="GroupMember">
+    <Key>
+      <PropertyRef Name="GroupMemberNo" />
+    </Key>
+    <Property Name="GroupMemberNo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="GroupMemberPersonNo" Type="int" Nullable="false" />
     <Property Name="GroupNo" Type="int" Nullable="false" />
-    <Property Name="GroupTypeNo" Type="int" />
-    <Property Name="GroupPersonNo" Type="int" />
-    <Property Name="GroupDesc" Type="nvarchar" MaxLength="100" />
-    <Property Name="StartDate" Type="datetime" />
-    <Property Name="EndDate" Type="datetime" />
     <Property Name="SystemDate" Type="datetime" />
   </EntityType>
   <EntityType Name="GroupType">
@@ -89,6 +98,7 @@
   <EntityContainer Name="InstituteModelStoreContainer">
     <EntitySet Name="Gender" EntityType="Self.Gender" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Group" EntityType="Self.Group" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="GroupMember" EntityType="Self.GroupMember" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="GroupType" EntityType="Self.GroupType" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="IDType" EntityType="Self.IDType" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Person" EntityType="Self.Person" Schema="dbo" store:Type="Tables" />

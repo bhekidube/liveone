@@ -16,12 +16,21 @@
           <Key>
             <PropertyRef Name="GroupNo" />
           </Key>
+          <Property Name="GroupNo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="GroupTypeNo" Type="int" Nullable="false" />
+          <Property Name="GroupPersonNo" Type="int" Nullable="false" />
+          <Property Name="GroupDesc" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="StartDate" Type="datetime" Nullable="false" />
+          <Property Name="EndDate" Type="datetime" Nullable="false" />
+          <Property Name="SystemDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="GroupMember">
+          <Key>
+            <PropertyRef Name="GroupMemberNo" />
+          </Key>
+          <Property Name="GroupMemberNo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="GroupMemberPersonNo" Type="int" Nullable="false" />
           <Property Name="GroupNo" Type="int" Nullable="false" />
-          <Property Name="GroupTypeNo" Type="int" />
-          <Property Name="GroupPersonNo" Type="int" />
-          <Property Name="GroupDesc" Type="nvarchar" MaxLength="100" />
-          <Property Name="StartDate" Type="datetime" />
-          <Property Name="EndDate" Type="datetime" />
           <Property Name="SystemDate" Type="datetime" />
         </EntityType>
         <EntityType Name="GroupType">
@@ -94,6 +103,7 @@
         <EntityContainer Name="InstituteModelStoreContainer">
           <EntitySet Name="Gender" EntityType="Self.Gender" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Group" EntityType="Self.Group" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="GroupMember" EntityType="Self.GroupMember" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="GroupType" EntityType="Self.GroupType" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="IDType" EntityType="Self.IDType" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Person" EntityType="Self.Person" Schema="dbo" store:Type="Tables" />
@@ -116,6 +126,7 @@
           <EntitySet Name="Works" EntityType="InstituteModel.Work" />
           <EntitySet Name="WorkTypes" EntityType="InstituteModel.WorkType" />
           <EntitySet Name="Groups" EntityType="InstituteModel.Group" />
+          <EntitySet Name="GroupMembers" EntityType="InstituteModel.GroupMember" />
         </EntityContainer>
         <EntityType Name="Gender">
           <Key>
@@ -196,11 +207,20 @@
             <PropertyRef Name="GroupNo" />
           </Key>
           <Property Name="GroupNo" Type="Int32" Nullable="false" />
-          <Property Name="GroupTypeNo" Type="Int32" />
-          <Property Name="GroupPersonNo" Type="Int32" />
-          <Property Name="GroupDesc" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="StartDate" Type="DateTime" Precision="3" />
-          <Property Name="EndDate" Type="DateTime" Precision="3" />
+          <Property Name="GroupTypeNo" Type="Int32" Nullable="false" />
+          <Property Name="GroupPersonNo" Type="Int32" Nullable="false" />
+          <Property Name="GroupDesc" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="StartDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="EndDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="SystemDate" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="GroupMember">
+          <Key>
+            <PropertyRef Name="GroupMemberNo" />
+          </Key>
+          <Property Name="GroupMemberNo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="GroupMemberPersonNo" Type="Int32" Nullable="false" />
+          <Property Name="GroupNo" Type="Int32" Nullable="false" />
           <Property Name="SystemDate" Type="DateTime" Precision="3" />
         </EntityType>
       </Schema>
@@ -301,6 +321,16 @@
                 <ScalarProperty Name="GroupPersonNo" ColumnName="GroupPersonNo" />
                 <ScalarProperty Name="GroupTypeNo" ColumnName="GroupTypeNo" />
                 <ScalarProperty Name="GroupNo" ColumnName="GroupNo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GroupMembers">
+            <EntityTypeMapping TypeName="InstituteModel.GroupMember">
+              <MappingFragment StoreEntitySet="GroupMember">
+                <ScalarProperty Name="SystemDate" ColumnName="SystemDate" />
+                <ScalarProperty Name="GroupNo" ColumnName="GroupNo" />
+                <ScalarProperty Name="GroupMemberPersonNo" ColumnName="GroupMemberPersonNo" />
+                <ScalarProperty Name="GroupMemberNo" ColumnName="GroupMemberNo" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -58,6 +58,9 @@
     <Compile Include="Group.cs">
       <DependentUpon>PersonDataModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="GroupMember.cs">
+      <DependentUpon>PersonDataModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="GroupType.cs">
       <DependentUpon>PersonDataModel.tt</DependentUpon>
     </Compile>

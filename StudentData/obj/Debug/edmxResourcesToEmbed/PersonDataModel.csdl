@@ -10,6 +10,7 @@
     <EntitySet Name="Works" EntityType="InstituteModel.Work" />
     <EntitySet Name="WorkTypes" EntityType="InstituteModel.WorkType" />
     <EntitySet Name="Groups" EntityType="InstituteModel.Group" />
+    <EntitySet Name="GroupMembers" EntityType="InstituteModel.GroupMember" />
   </EntityContainer>
   <EntityType Name="Gender">
     <Key>
@@ -90,11 +91,20 @@
       <PropertyRef Name="GroupNo" />
     </Key>
     <Property Name="GroupNo" Type="Int32" Nullable="false" />
-    <Property Name="GroupTypeNo" Type="Int32" />
-    <Property Name="GroupPersonNo" Type="Int32" />
-    <Property Name="GroupDesc" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-    <Property Name="StartDate" Type="DateTime" Precision="3" />
-    <Property Name="EndDate" Type="DateTime" Precision="3" />
+    <Property Name="GroupTypeNo" Type="Int32" Nullable="false" />
+    <Property Name="GroupPersonNo" Type="Int32" Nullable="false" />
+    <Property Name="GroupDesc" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="StartDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="EndDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="SystemDate" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="GroupMember">
+    <Key>
+      <PropertyRef Name="GroupMemberNo" />
+    </Key>
+    <Property Name="GroupMemberNo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="GroupMemberPersonNo" Type="Int32" Nullable="false" />
+    <Property Name="GroupNo" Type="Int32" Nullable="false" />
     <Property Name="SystemDate" Type="DateTime" Precision="3" />
   </EntityType>
 </Schema>

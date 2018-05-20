@@ -12,8 +12,10 @@ namespace StudentData.Custom
         private GenericRepository<IDType> _idTypeRepository;
         private GenericRepository<GroupType> _groupTypeRepository;
         private GenericRepository<Group> _groupRepository;
+        private GenericRepository<GroupMember> _groupMemberRepository;
         private GenericRepository<Work> _workRepository;
         private GenericRepository<WorkType> _workTypeRepository;
+
 
         public GenericRepository<Person> PersonRepository
         {
@@ -69,6 +71,18 @@ namespace StudentData.Custom
                     _groupRepository = new GenericRepository<Group>(_context.ObjectContext);
                 }
                 return _groupRepository;
+            }
+        }
+
+        public GenericRepository<GroupMember> GroupMemberRepository
+        {
+            get
+            {
+                if (_groupMemberRepository == null)
+                {
+                    _groupMemberRepository = new GenericRepository<GroupMember>(_context.ObjectContext);
+                }
+                return _groupMemberRepository;
             }
         }
 

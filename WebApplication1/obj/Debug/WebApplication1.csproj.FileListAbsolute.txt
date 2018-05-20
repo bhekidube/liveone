@@ -150,3 +150,5 @@ C:\Users\bhekid\Documents\GitHub\liveone\WebApplication1\bin\EntityFramework.xml
 C:\Users\bhekid\Documents\GitHub\liveone\WebApplication1\obj\Debug\WebApplication1.csprojResolveAssemblyReference.cache
 C:\Users\bhekid\Documents\GitHub\liveone\WebApplication1\obj\Debug\WebApplication1.dll
 C:\Users\bhekid\Documents\GitHub\liveone\WebApplication1\obj\Debug\WebApplication1.pdb
+C:\Users\bhekid\Documents\GitHub\liveone\WebApplication1\bin\EntityFramework.SqlServer.dll
+C:\Users\bhekid\Documents\GitHub\liveone\WebApplication1\bin\EntityFramework.SqlServer.xml

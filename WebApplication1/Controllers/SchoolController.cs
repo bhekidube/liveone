@@ -1,5 +1,6 @@
 ﻿using StudentData;
 using StudentData.Custom;
+using System;
 using System.Collections.Generic;
 using System.Web.Mvc;
 using WebApplication1.Models;
@@ -24,6 +25,37 @@ namespace WebApplication1.Controllers
 
             return View("Index", ListOfPersons());
         }
+
+        public ActionResult CreateGroup(GroupEdit model)
+        {
+            var grp = new Group() { GroupTypeNo = model.GroupType, GroupDesc = model.GroupDesc,
+                StartDate = model.StartDate, EndDate = model.EndDate, SystemDate = DateTime.Now,
+                GroupPersonNo = model.GroupPersonNo
+            };
+            unitOfWork.GroupRepository.Add(grp);
+            unitOfWork.Save();
+            ViewBag.Groups = ListOfGroups();
+            return View("CreateGroup");
+        }
+
+        public ActionResult AddGroupMember(PersonModelEdit person)
+        {
+            var grpMember = new GroupMember()
+            {
+                GroupMemberPersonNo = person.PersonNo,
+                GroupNo = person.Group,
+                SystemDate = DateTime.Now
+            };
+            unitOfWork.GroupMemberRepository.Add(grpMember);
+            unitOfWork.Save();
+            return View("");
+        }
+
+        public ActionResult ViewCreateGroup(GroupEdit model)
+        {
+            ViewBag.Groups = ListOfGroups();
+            return View("CreateGroup",ListOfGroups());
+        }
         public ActionResult Delete(int PersonNo)
         {
             Person PersonToDelete = unitOfWork.PersonRepository.FindBy(x => x.PersonNo == PersonNo);
@@ -32,12 +64,37 @@ namespace WebApplication1.Controllers
             unitOfWork.Save();
             return View("Index", ListOfPersons());
         }
+        public ActionResult DeleteGroup(int GroupNo)
+        {
+            Group GroupToDelete = unitOfWork.GroupRepository.FindBy(x => x.GroupNo == GroupNo);
+
+            unitOfWork.GroupRepository.Remove(GroupToDelete);
+            unitOfWork.Save();
+            return View("CreateGroup", ViewBag.Groups = ListOfGroups());
+        }
         private IEnumerable<PersonModelEdit> ListOfPersons()
         {
             List<PersonModelEdit> list = new List<PersonModelEdit>();
             foreach (var person in unitOfWork.PersonRepository.Find(x => x.Name != "456"))
             { list.Add(new PersonModelEdit() { PersonNo = person.PersonNo, Name = person.Name, Surname = person.Surname }); }
             IEnumerable<PersonModelEdit> en = list;
+            return en;
+        }
+
+        private IEnumerable<GroupEdit> ListOfGroups()
+        {
+            List<GroupEdit> list = new List<GroupEdit>();
+            foreach (var group in unitOfWork.GroupRepository.Find(x => x.GroupDesc != "456"))
+            { list.Add(new GroupEdit()
+            {
+                GroupNo = group.GroupNo,
+                GroupType = group.GroupTypeNo,
+                GroupPersonNo = group.GroupPersonNo,
+                GroupDesc = group.GroupDesc,
+                StartDate = group.StartDate,
+                EndDate = group.EndDate,
+            }); }
+            IEnumerable<GroupEdit> en = list;
             return en;
         }
 
@@ -69,10 +126,10 @@ namespace WebApplication1.Controllers
                     groupTypes.Add(new Models.GroupType() { GroupTypeNo = gtype.GroupTypeNo, GroupTypeDesc = gtype.GroupTypeDesc });
                 }
 
-                List<Models.Group> groups = new List<Models.Group>();
+                List<GroupEdit> groups = new List<GroupEdit>();
                 foreach (var g in Group)
                 {
-                    groups.Add(new Models.Group() { GroupNo = g.GroupNo, GroupDesc = g.GroupDesc });
+                    groups.Add(new GroupEdit() { GroupNo = g.GroupNo, GroupDesc = g.GroupDesc });
                 }
 
                 PersonModelEdit personmodel = new PersonModelEdit()
@@ -95,6 +152,36 @@ namespace WebApplication1.Controllers
             return View("ViewUpdate", Dummypersonmodel);
         }
 
+        public ActionResult ViewEditGroup(GroupEdit group)
+        {
+            if (group != null)
+            {
+                Group GroupToUpdate = unitOfWork.GroupRepository.FindBy(x => x.GroupNo == group.GroupNo);
+                IEnumerable<StudentData.GroupType> GroupTypes = unitOfWork.GroupTypeRepository.Find(x => x.GroupTypeDesc != "456");
+
+                List<Models.GroupType> groupTypes = new List<Models.GroupType>();
+                foreach (var gtype in GroupTypes)
+                {
+                    groupTypes.Add(new Models.GroupType() { GroupTypeNo = gtype.GroupTypeNo, GroupTypeDesc = gtype.GroupTypeDesc });
+                }
+
+                GroupEdit groupmodel = new GroupEdit()
+                {
+                    GroupNo = GroupToUpdate.GroupNo,
+                    GroupDesc = GroupToUpdate.GroupDesc,
+                    GroupPersonNo = GroupToUpdate.GroupPersonNo,
+                    GroupType = GroupToUpdate.GroupTypeNo,
+                    GroupTypes = groupTypes,
+                    StartDate = GroupToUpdate.StartDate,
+                    EndDate = GroupToUpdate.EndDate,
+                    SystemDate = (DateTime)GroupToUpdate.SystemDate
+                };
+                return View("ViewEditGroup", groupmodel);
+            }
+            GroupEdit Dummygroupmodel = new GroupEdit() { GroupNo = 0, GroupDesc = "", GroupPersonNo = 0 };
+            return View("ViewEditGroup", Dummygroupmodel);
+        }
+
         public ActionResult Update(PersonModelEdit person)
         {
             Person PersonToUpdate = unitOfWork.PersonRepository.FindBy(x => x.PersonNo == person.PersonNo);
@@ -106,6 +193,10 @@ namespace WebApplication1.Controllers
             PersonToUpdate.GenderNo = person.Gender;
             PersonToUpdate.DOB = person.DOB;
             unitOfWork.Save();
+
+            // if Add to group do the below:
+            if (person.AddToGroup == true)
+                AddGroupMember(person);
 
             return View("Index", ListOfPersons());
         }

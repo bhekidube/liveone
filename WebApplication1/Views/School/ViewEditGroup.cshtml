@@ -1,0 +1,30 @@
+﻿@model WebApplication1.Models.GroupEdit
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<header class="masthead">
+    <section id="personCapture">
+        @using (Html.BeginForm("ViewEditGroup", "School", FormMethod.Post))
+            {
+            <div>
+                <input type="hidden" name="PersonNo" value=@Model.GroupNo />
+                Group Name    <input type="text" name="Name" value=@Model.GroupDesc /><br>
+                <div>
+                    Group Type
+                    @Html.DropDownListFor(model => model.GroupType, new SelectList(Model.GroupTypes, "GroupTypeNo", "GroupTypeDesc", "-- Select Group Type --"))
+                </div>
+                Start Date @Html.TextBoxFor(model => model.StartDate,
+                    new { @type = "date", @Value = Model.StartDate.ToString("yyyy-MM-dd") })<br>
+                End Date @Html.TextBoxFor(model => model.EndDate,
+                    new { @type = "date", @Value = Model.EndDate.ToString("yyyy-MM-dd") })
+                <div class="form-group">
+
+                    <input type="submit" value="Save changes" class="btn-primary"><br /><br />
+                </div>
+            </div>
+        }
+    </section>

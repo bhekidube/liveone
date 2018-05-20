@@ -34,5 +34,6 @@ namespace StudentData
         public virtual DbSet<Work> Works { get; set; }
         public virtual DbSet<WorkType> WorkTypes { get; set; }
         public virtual DbSet<Group> Groups { get; set; }
+        public virtual DbSet<GroupMember> GroupMembers { get; set; }
     }
 }
