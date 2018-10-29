@@ -16,5 +16,6 @@ namespace StudentData
     {
         public int WorkTypeNo { get; set; }
         public string WorkTypeDesc { get; set; }
+        public Nullable<System.DateTime> SystemDate { get; set; }
     }
 }

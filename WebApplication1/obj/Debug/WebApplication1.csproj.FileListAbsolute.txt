@@ -103,6 +103,10 @@ C:\Users\bhekid\Documents\GitHub\liveone\WebApplication1\bin\WebApplication1.dll
 C:\Users\bhekid\Documents\GitHub\liveone\WebApplication1\bin\WebApplication1.dll
 C:\Users\bhekid\Documents\GitHub\liveone\WebApplication1\bin\WebApplication1.pdb
 C:\Users\bhekid\Documents\GitHub\liveone\WebApplication1\bin\Antlr3.Runtime.dll
+C:\Users\bhekid\Documents\GitHub\liveone\WebApplication1\bin\Elmah.dll
+C:\Users\bhekid\Documents\GitHub\liveone\WebApplication1\bin\Elmah.Mvc.dll
+C:\Users\bhekid\Documents\GitHub\liveone\WebApplication1\bin\EntityFramework.dll
+C:\Users\bhekid\Documents\GitHub\liveone\WebApplication1\bin\EntityFramework.SqlServer.dll
 C:\Users\bhekid\Documents\GitHub\liveone\WebApplication1\bin\Microsoft.AI.Agent.Intercept.dll
 C:\Users\bhekid\Documents\GitHub\liveone\WebApplication1\bin\Microsoft.AI.DependencyCollector.dll
 C:\Users\bhekid\Documents\GitHub\liveone\WebApplication1\bin\Microsoft.AI.PerfCounterCollector.dll
@@ -126,8 +130,10 @@ C:\Users\bhekid\Documents\GitHub\liveone\WebApplication1\bin\System.Web.WebPages
 C:\Users\bhekid\Documents\GitHub\liveone\WebApplication1\bin\System.Web.WebPages.Razor.dll
 C:\Users\bhekid\Documents\GitHub\liveone\WebApplication1\bin\WebActivatorEx.dll
 C:\Users\bhekid\Documents\GitHub\liveone\WebApplication1\bin\WebGrease.dll
-C:\Users\bhekid\Documents\GitHub\liveone\WebApplication1\bin\EntityFramework.dll
+C:\Users\bhekid\Documents\GitHub\liveone\WebApplication1\bin\System.Data.SqlServerCe.dll
 C:\Users\bhekid\Documents\GitHub\liveone\WebApplication1\bin\StudentData.pdb
+C:\Users\bhekid\Documents\GitHub\liveone\WebApplication1\bin\EntityFramework.xml
+C:\Users\bhekid\Documents\GitHub\liveone\WebApplication1\bin\EntityFramework.SqlServer.xml
 C:\Users\bhekid\Documents\GitHub\liveone\WebApplication1\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
 C:\Users\bhekid\Documents\GitHub\liveone\WebApplication1\bin\Ninject.xml
 C:\Users\bhekid\Documents\GitHub\liveone\WebApplication1\bin\Ninject.Web.Common.xml
@@ -146,9 +152,6 @@ C:\Users\bhekid\Documents\GitHub\liveone\WebApplication1\bin\Microsoft.AI.Depend
 C:\Users\bhekid\Documents\GitHub\liveone\WebApplication1\bin\Microsoft.AI.ServerTelemetryChannel.xml
 C:\Users\bhekid\Documents\GitHub\liveone\WebApplication1\bin\Microsoft.AI.WindowsServer.xml
 C:\Users\bhekid\Documents\GitHub\liveone\WebApplication1\bin\Microsoft.AI.Web.xml
-C:\Users\bhekid\Documents\GitHub\liveone\WebApplication1\bin\EntityFramework.xml
 C:\Users\bhekid\Documents\GitHub\liveone\WebApplication1\obj\Debug\WebApplication1.csprojResolveAssemblyReference.cache
 C:\Users\bhekid\Documents\GitHub\liveone\WebApplication1\obj\Debug\WebApplication1.dll
 C:\Users\bhekid\Documents\GitHub\liveone\WebApplication1\obj\Debug\WebApplication1.pdb
-C:\Users\bhekid\Documents\GitHub\liveone\WebApplication1\bin\EntityFramework.SqlServer.dll
-C:\Users\bhekid\Documents\GitHub\liveone\WebApplication1\bin\EntityFramework.SqlServer.xml

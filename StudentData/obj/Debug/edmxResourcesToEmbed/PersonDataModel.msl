@@ -61,23 +61,10 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Works">
-      <EntityTypeMapping TypeName="InstituteModel.Work">
-        <MappingFragment StoreEntitySet="Work">
-          <ScalarProperty Name="SystemDate" ColumnName="SystemDate" />
-          <ScalarProperty Name="GroupNameEndDate" ColumnName="GroupNameEndDate" />
-          <ScalarProperty Name="GroupNameStartDate" ColumnName="GroupNameStartDate" />
-          <ScalarProperty Name="PersonNo" ColumnName="PersonNo" />
-          <ScalarProperty Name="GroupNo" ColumnName="GroupNo" />
-          <ScalarProperty Name="WorkTypeNo" ColumnName="WorkTypeNo" />
-          <ScalarProperty Name="WorkDesc" ColumnName="WorkDesc" />
-          <ScalarProperty Name="WorkNo" ColumnName="WorkNo" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="WorkTypes">
       <EntityTypeMapping TypeName="InstituteModel.WorkType">
         <MappingFragment StoreEntitySet="WorkType">
+          <ScalarProperty Name="SystemDate" ColumnName="SystemDate" />
           <ScalarProperty Name="WorkTypeDesc" ColumnName="WorkTypeDesc" />
           <ScalarProperty Name="WorkTypeNo" ColumnName="WorkTypeNo" />
         </MappingFragment>
@@ -103,6 +90,20 @@
           <ScalarProperty Name="GroupNo" ColumnName="GroupNo" />
           <ScalarProperty Name="GroupMemberPersonNo" ColumnName="GroupMemberPersonNo" />
           <ScalarProperty Name="GroupMemberNo" ColumnName="GroupMemberNo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Works">
+      <EntityTypeMapping TypeName="InstituteModel.Work">
+        <MappingFragment StoreEntitySet="Work">
+          <ScalarProperty Name="SystemDate" ColumnName="SystemDate" />
+          <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+          <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+          <ScalarProperty Name="PersonNo" ColumnName="PersonNo" />
+          <ScalarProperty Name="GroupNo" ColumnName="GroupNo" />
+          <ScalarProperty Name="WorkTypeNo" ColumnName="WorkTypeNo" />
+          <ScalarProperty Name="WorkDesc" ColumnName="WorkDesc" />
+          <ScalarProperty Name="WorkNo" ColumnName="WorkNo" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

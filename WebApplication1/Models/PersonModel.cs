@@ -21,7 +21,7 @@ namespace WebApplication1.Models
         public IEnumerable<IDType> IDTypes { get; set; }
         public IEnumerable<GroupType> GroupTypes { get; set; }
         public IEnumerable<GroupEdit> Groups { get; set; }
-        public bool AddToGroup{get;set;}
+        public bool AddToGroup { get; set; }
 
     }
 
@@ -42,7 +42,6 @@ namespace WebApplication1.Models
         public DateTime SystemDate { get; set; }
         public int CreatedBy { get; set; }
     }
-
     public class GroupEdit
     {
         public int GroupNo { get; set; }
@@ -54,8 +53,28 @@ namespace WebApplication1.Models
         public DateTime SystemDate { get; set; }
         public IEnumerable<GroupType> GroupTypes { get; set; }
     }
-
-
+    public class WorkEdit
+    {
+        public int WorkNo;
+        public string WorkDesc;
+        public int WorkTypeNo;
+        public int GroupNo;
+        public string GroupName;
+        public int PersonNo;
+        public DateTime StartDate;
+        public DateTime EndDate;
+        //public IEnumerable<GroupEdit> Groups { get; set; }
+        public IEnumerable<WorkTypeEdit> WorkTypes { get; set; }
+        public DateTime SystemDate;
+    }
+    public class WorkTypeEdit
+    {
+        public int WorkTypeNo;
+        public string WorkTypeDesc;
+        public DateTime SystemDate;
+        public DateTime StartDate;
+        public DateTime EndDate;
+    }
 
 
 

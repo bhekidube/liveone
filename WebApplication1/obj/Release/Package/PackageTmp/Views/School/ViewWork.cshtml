@@ -1,0 +1,94 @@
+﻿
+@*@model IEnumerable<WebApplication1.Models.WorkEdit> 
+
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}*@
+
+@*<header class="masthead">
+    <section id="personCapture">
+        @using (Html.BeginForm("Save", "School", FormMethod.Post))
+            {
+            <div>
+                Name    <input type="text" name="Name" value="" /><br>
+                Surname <input type="text" name="Surname" value="" /><br>
+                DOB <input type="date" name="DOB"><br />
+                Person Type
+                <input type="radio" name="PersonType" value="1"> Student
+                <input type="radio" name="PersonType" value="2" checked> Teacher
+                <input type="radio" name="PersonType" value="3"> Parent
+                <br>ID Type
+                <select name="IDType">
+                    <option value="1">ID</option>
+                    <option value="2">Birth certificate</option>
+                    <option value="3">Passport</option>
+                </select>
+                <br>ID number <input type="text" name="ID" value="" /><br><br>
+                Gender <input type="radio" name="gender" value="1" checked> Male
+                <input type="radio" name="gender" value="2"> Female<br>
+                <input type="submit" value="Save new member" class="btn-primary">
+
+            </div>
+        }
+    </section>*@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@model IEnumerable<WebApplication1.Models.WorkEdit>
+
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<header class="masthead">
+    <section id="workCapture">
+        @using (Html.BeginForm("AddWork", "School", FormMethod.Post))
+            {
+            <div>
+
+                        Work Name    <input type="text" name="WorkDesc" value="" /><br>
+                        <br>Work Type
+                        <select name="WorkTypeNo">
+                            <option value="1">Class Test</option>
+                            <option value="2">Exercise</option>
+                            <option value="3">Examination</option>
+                            <option value="4">Match</option>
+                            <option value="5">Training</option>
+                        </select><br>
+                        <input type="date" name="StartDate" value="" />
+                        <input type="date" name="EndDate" value="" />
+                        @*Start Date @Html.TextBoxFor(model => model,
+                            new { @type = "date", @Value = Model.StartDate.ToString("yyyy-MM-dd") })<br>
+                        End Date @Html.TextBoxFor(model => model.EndDate,
+                            new { @type = "date", @Value = Model.EndDate.ToString("yyyy-MM-dd") })*@
+
+
+
+
+                        <input type="submit" value="Save new work" class="btn-primary">
+
+            </div>
+        }
+    </section>
+</header>

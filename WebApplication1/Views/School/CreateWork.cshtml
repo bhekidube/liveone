@@ -1,0 +1,61 @@
+﻿@model IEnumerable<WebApplication1.Models.WorkEdit>
+
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<header class="masthead">
+    <section id="workCapture">
+        @using (Html.BeginForm("AddWork", "School", FormMethod.Post))
+            {
+            <div>
+                        <input hidden name="GroupNo" value=@ViewBag.GroupNo /><br>
+                        Work Name    <input type="text" name="WorkName" value="" /><br>
+                        <br>Work Type
+                        <select name="WorkTypeNo">
+                            <option value="1">Class Test</option>
+                            <option value="2">Exercise</option>
+                            <option value="3">Examination</option>
+                            <option value="4">Match</option>
+                            <option value="5">Training</option>
+                        </select><br>
+                        Start Date <input type="date" name="StartDate"/>
+                        End Date <input type="date" name="EndDate"/>
+                        <input type="submit" value="Save new work" class="btn-primary">
+
+            </div>
+        }
+    </section>
+</header>
+@*<div>@Html.ActionLink("Create Work", "ViewCreateWork", "School", null, null)</div>*@
+<table>
+    <tr>
+        <td>Work name</td>
+        <td>
+            Start Date
+        </td>
+        <td>
+            End Date
+        </td>
+
+    </tr>
+    @foreach (var element in (List<WebApplication1.Models.WorkEdit>)ViewBag.ListOfWork)
+    {
+
+        <tr>
+            <td>@Html.ActionLink(element.WorkDesc, "ViewEditWork", "School", new { element.WorkNo }, null)</td>
+            <td>
+                @element.StartDate
+            </td>
+            <td>
+                @element.EndDate
+            </td>
+            <td>
+                @Html.ActionLink("Remove", "DeleteWork", "School", new { element.WorkNo }, null)
+            </td>
+        </tr>
+    }
+</table>
+

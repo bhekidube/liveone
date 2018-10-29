@@ -15,28 +15,24 @@ namespace WebApplication1.Controllers
         {
             return View(ListOfPersons());
         }
-        [HttpPost]
-        public ActionResult Save(PersonModelEdit model)
-        {
-            var PersonCaptured = new Person() { Name = model.Name, Surname = model.Surname, GenderNo = model.Gender,DOB = model.DOB,
-                IdNo = model.ID, IdTypeNo = model.IDType, PersonTypeNo = model.PersonType };
-            unitOfWork.PersonRepository.Add(PersonCaptured);
-            unitOfWork.Save();
 
-            return View("Index", ListOfPersons());
-        }
 
-        public ActionResult CreateGroup(GroupEdit model)
-        {
-            var grp = new Group() { GroupTypeNo = model.GroupType, GroupDesc = model.GroupDesc,
-                StartDate = model.StartDate, EndDate = model.EndDate, SystemDate = DateTime.Now,
-                GroupPersonNo = model.GroupPersonNo
-            };
-            unitOfWork.GroupRepository.Add(grp);
-            unitOfWork.Save();
-            ViewBag.Groups = ListOfGroups();
-            return View("CreateGroup");
-        }
+        //public ActionResult CreateGroup(GroupEdit model)
+        //{
+        //    var grp = new Group()
+        //    {
+        //        GroupTypeNo = model.GroupType,
+        //        GroupDesc = model.GroupDesc,
+        //        StartDate = model.StartDate,
+        //        EndDate = model.EndDate,
+        //        SystemDate = DateTime.Now,
+        //        GroupPersonNo = model.GroupPersonNo
+        //    };
+        //    unitOfWork.GroupRepository.Add(grp);
+        //    unitOfWork.Save();
+        //    ViewBag.Groups = ListOfGroups();
+        //    return View("CreateGroup");
+        //}
 
         public ActionResult AddGroupMember(PersonModelEdit person)
         {
@@ -54,7 +50,7 @@ namespace WebApplication1.Controllers
         public ActionResult ViewCreateGroup(GroupEdit model)
         {
             ViewBag.Groups = ListOfGroups();
-            return View("CreateGroup",ListOfGroups());
+            return View("CreateGroup", ListOfGroups());
         }
         public ActionResult Delete(int PersonNo)
         {
@@ -85,16 +81,37 @@ namespace WebApplication1.Controllers
         {
             List<GroupEdit> list = new List<GroupEdit>();
             foreach (var group in unitOfWork.GroupRepository.Find(x => x.GroupDesc != "456"))
-            { list.Add(new GroupEdit()
             {
-                GroupNo = group.GroupNo,
-                GroupType = group.GroupTypeNo,
-                GroupPersonNo = group.GroupPersonNo,
-                GroupDesc = group.GroupDesc,
-                StartDate = group.StartDate,
-                EndDate = group.EndDate,
-            }); }
+                list.Add(new GroupEdit()
+                {
+                    GroupNo = group.GroupNo,
+                    GroupType = group.GroupTypeNo,
+                    GroupPersonNo = group.GroupPersonNo,
+                    GroupDesc = group.GroupDesc,
+                    StartDate = group.StartDate,
+                    EndDate = group.EndDate,
+                });
+            }
             IEnumerable<GroupEdit> en = list;
+            return en;
+        }
+
+        private IEnumerable<WorkEdit> ListOfWork()
+        {
+            List<WorkEdit> list = new List<WorkEdit>();
+            foreach (var work in unitOfWork.WorkRepository.Find(x => x.WorkDesc != "456"))
+            {
+                list.Add(new WorkEdit()
+                {
+                    WorkNo = work.WorkNo,
+                    WorkDesc = work.WorkDesc,
+                    WorkTypeNo = work.WorkTypeNo,
+                    PersonNo = work.PersonNo,
+                    StartDate = work.StartDate,
+                    EndDate = work.EndDate
+                });
+            }
+            IEnumerable<WorkEdit> en = list;
             return en;
         }
 
@@ -111,7 +128,7 @@ namespace WebApplication1.Controllers
                 List<Models.PersonType> ps = new List<Models.PersonType>();
                 foreach (var PersonType in PersonTypes)
                 {
-                    ps.Add(new Models.PersonType() { PersonTypeNo = PersonType.PersonTypeNo,PersonTypeDesc = PersonType.PersonTypeDesc } );
+                    ps.Add(new Models.PersonType() { PersonTypeNo = PersonType.PersonTypeNo, PersonTypeDesc = PersonType.PersonTypeDesc });
                 }
 
                 List<Models.IDType> idtps = new List<Models.IDType>();
@@ -133,7 +150,8 @@ namespace WebApplication1.Controllers
                 }
 
                 PersonModelEdit personmodel = new PersonModelEdit()
-                { PersonNo = PersonToUpdate.PersonNo,
+                {
+                    PersonNo = PersonToUpdate.PersonNo,
                     Name = PersonToUpdate.Name,
                     Surname = PersonToUpdate.Surname,
                     Gender = PersonToUpdate.GenderNo,
@@ -199,6 +217,65 @@ namespace WebApplication1.Controllers
                 AddGroupMember(person);
 
             return View("Index", ListOfPersons());
+        }
+
+        [HttpPost]
+        public ActionResult Save(PersonModelEdit model)
+        {
+            var PersonCaptured = new Person()
+            {
+                Name = model.Name,
+                Surname = model.Surname,
+                GenderNo = model.Gender,
+                DOB = model.DOB,
+                IdNo = model.ID,
+                IdTypeNo = model.IDType,
+                PersonTypeNo = model.PersonType
+            };
+            unitOfWork.PersonRepository.Add(PersonCaptured);
+            unitOfWork.Save();
+
+            return View("Index", ListOfPersons());
+        }
+        [HttpPost]
+        public ActionResult AddWork(int GroupNo, string WorkName, int WorkTypeNo,DateTime StartDate,DateTime EndDate)
+        {
+            var EntityFmWork = new Work()
+            {
+             
+                WorkTypeNo = WorkTypeNo,
+                WorkDesc = WorkName,
+                StartDate = StartDate,
+                EndDate = EndDate,
+                SystemDate = DateTime.Now
+            };
+            unitOfWork.WorkRepository.Add(EntityFmWork);
+            unitOfWork.Save();
+            ViewBag.Groups = ListOfWork();
+            return View("AddWork");
+        }
+
+        public ActionResult CreateGroup(GroupEdit model)
+        {
+            var grp = new Group()
+            {
+                GroupTypeNo = model.GroupType,
+                GroupDesc = model.GroupDesc,
+                StartDate = model.StartDate,
+                EndDate = model.EndDate,
+                SystemDate = DateTime.Now,
+                GroupPersonNo = model.GroupPersonNo
+            };
+            unitOfWork.GroupRepository.Add(grp);
+            unitOfWork.Save();
+            ViewBag.Groups = ListOfGroups();
+            return View("CreateGroup");
+        }
+        public ActionResult CreateWork(int id)
+        {
+            ViewBag.ListOfWork = ListOfWork();
+            ViewBag.GroupNo = id;
+            return View(ListOfWork());
         }
     }
 }

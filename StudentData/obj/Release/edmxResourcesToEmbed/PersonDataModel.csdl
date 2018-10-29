@@ -1,0 +1,111 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="InstituteModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="InstituteEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Genders" EntityType="InstituteModel.Gender" />
+    <EntitySet Name="IDTypes" EntityType="InstituteModel.IDType" />
+    <EntitySet Name="People" EntityType="InstituteModel.Person" />
+    <EntitySet Name="PersonTypes" EntityType="InstituteModel.PersonType" />
+    <EntitySet Name="GroupTypes" EntityType="InstituteModel.GroupType" />
+    <EntitySet Name="Users" EntityType="InstituteModel.User" />
+    <EntitySet Name="WorkTypes" EntityType="InstituteModel.WorkType" />
+    <EntitySet Name="Groups" EntityType="InstituteModel.Group" />
+    <EntitySet Name="GroupMembers" EntityType="InstituteModel.GroupMember" />
+    <EntitySet Name="Works" EntityType="InstituteModel.Work" />
+  </EntityContainer>
+  <EntityType Name="Gender">
+    <Key>
+      <PropertyRef Name="GenderNo" />
+    </Key>
+    <Property Name="GenderNo" Type="Int32" Nullable="false" />
+    <Property Name="GenderDesc" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="IDType">
+    <Key>
+      <PropertyRef Name="IDTypeNo" />
+    </Key>
+    <Property Name="IDTypeNo" Type="Int32" Nullable="false" />
+    <Property Name="IDTypeDesc" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="Person">
+    <Key>
+      <PropertyRef Name="PersonNo" />
+    </Key>
+    <Property Name="PersonNo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="PersonTypeNo" Type="Int32" Nullable="false" />
+    <Property Name="IdTypeNo" Type="Int32" Nullable="false" />
+    <Property Name="IdNo" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Surname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="GenderNo" Type="Int32" Nullable="false" />
+    <Property Name="DOB" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="SystemDate" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="PersonType">
+    <Key>
+      <PropertyRef Name="PersonTypeNo" />
+    </Key>
+    <Property Name="PersonTypeNo" Type="Int32" Nullable="false" />
+    <Property Name="PersonTypeDesc" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="SystemDate" Type="DateTime" Precision="3" />
+    <Property Name="CreatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="GroupType">
+    <Key>
+      <PropertyRef Name="GroupTypeNo" />
+    </Key>
+    <Property Name="GroupTypeNo" Type="Int32" Nullable="false" />
+    <Property Name="GroupTypeDesc" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="SystemDate" Type="DateTime" Precision="3" />
+    <Property Name="CreatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="UserNo" />
+    </Key>
+    <Property Name="UserNo" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="UserPassword" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="WorkType">
+    <Key>
+      <PropertyRef Name="WorkTypeNo" />
+    </Key>
+    <Property Name="WorkTypeNo" Type="Int32" Nullable="false" />
+    <Property Name="WorkTypeDesc" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="SystemDate" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="Group">
+    <Key>
+      <PropertyRef Name="GroupNo" />
+    </Key>
+    <Property Name="GroupNo" Type="Int32" Nullable="false" />
+    <Property Name="GroupTypeNo" Type="Int32" Nullable="false" />
+    <Property Name="GroupPersonNo" Type="Int32" Nullable="false" />
+    <Property Name="GroupDesc" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="StartDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="EndDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="SystemDate" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="GroupMember">
+    <Key>
+      <PropertyRef Name="GroupMemberNo" />
+    </Key>
+    <Property Name="GroupMemberNo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="GroupMemberPersonNo" Type="Int32" Nullable="false" />
+    <Property Name="GroupNo" Type="Int32" Nullable="false" />
+    <Property Name="SystemDate" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="Work">
+    <Key>
+      <PropertyRef Name="WorkNo" />
+    </Key>
+    <Property Name="WorkNo" Type="Int32" Nullable="false" />
+    <Property Name="WorkDesc" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="WorkTypeNo" Type="Int32" Nullable="false" />
+    <Property Name="GroupNo" Type="Int32" Nullable="false" />
+    <Property Name="PersonNo" Type="Int32" Nullable="false" />
+    <Property Name="StartDate" Type="DateTime" Precision="3" Nullable="false" />
+    <Property Name="EndDate" Type="DateTime" Precision="3" Nullable="false" />
+    <Property Name="SystemDate" Type="DateTime" Precision="3" Nullable="false" />
+  </EntityType>
+</Schema>

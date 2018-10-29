@@ -1,0 +1,9 @@
+C:\Users\bhekid\Documents\GitHub\liveone\StudentData\bin\Release\StudentData.dll.config
+C:\Users\bhekid\Documents\GitHub\liveone\StudentData\bin\Release\StudentData.dll
+C:\Users\bhekid\Documents\GitHub\liveone\StudentData\bin\Release\StudentData.pdb
+C:\Users\bhekid\Documents\GitHub\liveone\StudentData\bin\Release\EntityFramework.dll
+C:\Users\bhekid\Documents\GitHub\liveone\StudentData\bin\Release\EntityFramework.SqlServer.dll
+C:\Users\bhekid\Documents\GitHub\liveone\StudentData\bin\Release\EntityFramework.xml
+C:\Users\bhekid\Documents\GitHub\liveone\StudentData\bin\Release\EntityFramework.SqlServer.xml
+C:\Users\bhekid\Documents\GitHub\liveone\StudentData\obj\Release\StudentData.dll
+C:\Users\bhekid\Documents\GitHub\liveone\StudentData\obj\Release\StudentData.pdb

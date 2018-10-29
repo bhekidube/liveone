@@ -16,11 +16,11 @@ namespace StudentData
     {
         public int WorkNo { get; set; }
         public string WorkDesc { get; set; }
-        public Nullable<int> WorkTypeNo { get; set; }
-        public Nullable<int> GroupNo { get; set; }
-        public Nullable<int> PersonNo { get; set; }
-        public Nullable<System.DateTime> GroupNameStartDate { get; set; }
-        public Nullable<System.DateTime> GroupNameEndDate { get; set; }
-        public Nullable<System.DateTime> SystemDate { get; set; }
+        public int WorkTypeNo { get; set; }
+        public int GroupNo { get; set; }
+        public int PersonNo { get; set; }
+        public System.DateTime StartDate { get; set; }
+        public System.DateTime EndDate { get; set; }
+        public System.DateTime SystemDate { get; set; }
     }
 }

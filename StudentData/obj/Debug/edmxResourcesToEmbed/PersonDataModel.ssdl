@@ -81,12 +81,12 @@
     </Key>
     <Property Name="WorkNo" Type="int" Nullable="false" />
     <Property Name="WorkDesc" Type="nvarchar" MaxLength="50" />
-    <Property Name="WorkTypeNo" Type="int" />
-    <Property Name="GroupNo" Type="int" />
-    <Property Name="PersonNo" Type="int" />
-    <Property Name="GroupNameStartDate" Type="datetime" />
-    <Property Name="GroupNameEndDate" Type="datetime" />
-    <Property Name="SystemDate" Type="datetime" />
+    <Property Name="WorkTypeNo" Type="int" Nullable="false" />
+    <Property Name="GroupNo" Type="int" Nullable="false" />
+    <Property Name="PersonNo" Type="int" Nullable="false" />
+    <Property Name="StartDate" Type="datetime" Nullable="false" />
+    <Property Name="EndDate" Type="datetime" Nullable="false" />
+    <Property Name="SystemDate" Type="datetime" Nullable="false" />
   </EntityType>
   <EntityType Name="WorkType">
     <Key>
@@ -94,6 +94,7 @@
     </Key>
     <Property Name="WorkTypeNo" Type="int" Nullable="false" />
     <Property Name="WorkTypeDesc" Type="nvarchar" MaxLength="50" />
+    <Property Name="SystemDate" Type="datetime" />
   </EntityType>
   <EntityContainer Name="InstituteModelStoreContainer">
     <EntitySet Name="Gender" EntityType="Self.Gender" Schema="dbo" store:Type="Tables" />
