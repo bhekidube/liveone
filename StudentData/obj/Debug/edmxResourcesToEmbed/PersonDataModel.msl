@@ -107,5 +107,32 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="GroupPersonTypes">
+      <EntityTypeMapping TypeName="InstituteModel.GroupPersonType">
+        <MappingFragment StoreEntitySet="GroupPersonType">
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="SystemDate" ColumnName="SystemDate" />
+          <ScalarProperty Name="GroupPersonTypeDesc" ColumnName="GroupPersonTypeDesc" />
+          <ScalarProperty Name="GroupPersonTypeNo" ColumnName="GroupPersonTypeNo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="sp_test_print_out" FunctionName="InstituteModel.Store.sp_test_print_out" />
+    <FunctionImportMapping FunctionImportName="sp_test_print_out_to_select" FunctionName="InstituteModel.Store.sp_test_print_out_to_select" />
+    <FunctionImportMapping FunctionImportName="test_NewGroupMembers" FunctionName="InstituteModel.Store.test_NewGroupMembers">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="InstituteModel.test_NewGroupMembers_Result">
+          <ScalarProperty Name="PersonNo" ColumnName="PersonNo" />
+          <ScalarProperty Name="PersonTypeNo" ColumnName="PersonTypeNo" />
+          <ScalarProperty Name="IdTypeNo" ColumnName="IdTypeNo" />
+          <ScalarProperty Name="IdNo" ColumnName="IdNo" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Surname" ColumnName="Surname" />
+          <ScalarProperty Name="GenderNo" ColumnName="GenderNo" />
+          <ScalarProperty Name="DOB" ColumnName="DOB" />
+          <ScalarProperty Name="SystemDate" ColumnName="SystemDate" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
   </EntityContainerMapping>
 </Mapping>

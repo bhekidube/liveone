@@ -40,7 +40,7 @@
         {
 
             <tr>
-                <td>@Html.ActionLink(element.GroupDesc, "ViewEditGroup", "School", new { element.GroupNo }, null)</td>
+                <td>@Html.ActionLink(element.GroupDesc, "ViewEditGroup", "School", new { id = element.GroupNo }, null)</td>
                 <td>
                     @element.StartDate
                 </td>
@@ -48,7 +48,7 @@
                     @element.EndDate
                 </td>
                 <td>
-                    @Html.ActionLink("Remove", "DeleteGroup", "School", new { element.GroupNo }, null)
+                    @Html.ActionLink("Remove", "DeleteGroup", "School", new { id = element.GroupNo }, null)
                 </td>
             </tr>
         }

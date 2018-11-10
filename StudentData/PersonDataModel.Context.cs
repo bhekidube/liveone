@@ -12,6 +12,8 @@ namespace StudentData
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
+    using System.Data.Entity.Core.Objects;
+    using System.Linq;
     
     public partial class InstituteEntities : DbContext
     {
@@ -35,5 +37,21 @@ namespace StudentData
         public virtual DbSet<Group> Groups { get; set; }
         public virtual DbSet<GroupMember> GroupMembers { get; set; }
         public virtual DbSet<Work> Works { get; set; }
+        public virtual DbSet<GroupPersonType> GroupPersonTypes { get; set; }
+    
+        public virtual int sp_test_print_out(ObjectParameter printMessages)
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_test_print_out", printMessages);
+        }
+    
+        public virtual ObjectResult<string> sp_test_print_out_to_select()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("sp_test_print_out_to_select");
+        }
+    
+        public virtual ObjectResult<test_NewGroupMembers_Result> test_NewGroupMembers()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<test_NewGroupMembers_Result>("test_NewGroupMembers");
+        }
     }
 }

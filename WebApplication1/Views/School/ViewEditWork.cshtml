@@ -1,4 +1,4 @@
-﻿@model WebApplication1.Models.GroupEdit
+﻿@model WebApplication1.Models.WorkEdit
 
 @{
     ViewBag.Title = "Index";
@@ -8,14 +8,14 @@
 
 <header class="masthead">
     <section id="personCapture">
-        @using (Html.BeginForm("ViewEditGroup", "School", FormMethod.Post))
+        @using (Html.BeginForm("ViewEditWork", "School", FormMethod.Post))
             {
             <div>
-                <input type="hidden" name="PersonNo" value=@Model.GroupNo />
-                Group Name    <input type="text" name="Name" value=@Model.GroupDesc /><br>
+                <input type="hidden" name="PersonNo" value=@Model.WorkNo />
+                Work Name    <input type="text" name="Name" value=@Model.WorkDesc /><br>
                 <div>
-                    Group Type
-                    @Html.DropDownListFor(model => model.GroupType, new SelectList(Model.GroupTypes, "GroupTypeNo", "GroupTypeDesc", "-- Select Group Type --"))
+                    Work Type
+                    @*@Html.DropDownListFor(model => model.WorkTypeNo, new SelectList(Model.WorkTypes, "WorkTypeNo", "WorkTypeDesc", "-- Select Work Type --"))*@
                 </div>
                 Start Date @Html.TextBoxFor(model => model.StartDate,
                     new { @type = "date", @Value = Model.StartDate.ToString("yyyy-MM-dd") })<br>
@@ -25,7 +25,6 @@
 
                     <input type="submit" value="Save changes" class="btn-primary"><br /><br />
                 </div>
-                @Html.ActionLink("Add work", "ViewCreateWork", "School", new { id = Model.GroupNo }, null)
             </div>
         }
     </section>
@@ -59,3 +58,4 @@
             </tr>
         }
     </table>
+

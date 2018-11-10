@@ -12,6 +12,7 @@
             {
             <div>
                         <input hidden name="GroupNo" value=@ViewBag.GroupNo /><br>
+                        <input hidden name="PersonNo" value=@ViewBag.PersonNo /><br>
                         Work Name    <input type="text" name="WorkName" value="" /><br>
                         <br>Work Type
                         <select name="WorkTypeNo">
@@ -29,7 +30,6 @@
         }
     </section>
 </header>
-@*<div>@Html.ActionLink("Create Work", "ViewCreateWork", "School", null, null)</div>*@
 <table>
     <tr>
         <td>Work name</td>
@@ -45,7 +45,7 @@
     {
 
         <tr>
-            <td>@Html.ActionLink(element.WorkDesc, "ViewEditWork", "School", new { element.WorkNo }, null)</td>
+            <td>@Html.ActionLink(element.WorkDesc, "ViewEditWork", "School", new { id = element.WorkNo}, null)</td>
             <td>
                 @element.StartDate
             </td>

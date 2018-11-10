@@ -103,7 +103,27 @@ namespace WebApplication1.Controllers
             {
                 list.Add(new WorkEdit()
                 {
+                    GroupNo = work.GroupNo,
+                    WorkDesc = work.WorkDesc,
+                    WorkTypeNo = work.WorkTypeNo,
+                    PersonNo = work.PersonNo,
+                    StartDate = work.StartDate,
+                    EndDate = work.EndDate
+                });
+            }
+            IEnumerable<WorkEdit> en = list;
+            return en;
+        }
+
+        private IEnumerable<WorkEdit> ListOfWorkByGroup(int GroupNo)
+        {
+            List<WorkEdit> list = new List<WorkEdit>();
+            foreach (var work in unitOfWork.WorkRepository.Find(x => x.GroupNo == GroupNo))
+            {
+                list.Add(new WorkEdit()
+                {
                     WorkNo = work.WorkNo,
+                    GroupNo = work.GroupNo,
                     WorkDesc = work.WorkDesc,
                     WorkTypeNo = work.WorkTypeNo,
                     PersonNo = work.PersonNo,
@@ -170,11 +190,11 @@ namespace WebApplication1.Controllers
             return View("ViewUpdate", Dummypersonmodel);
         }
 
-        public ActionResult ViewEditGroup(GroupEdit group)
+        public ActionResult ViewEditGroup(int id, GroupEdit group)
         {
             if (group != null)
             {
-                Group GroupToUpdate = unitOfWork.GroupRepository.FindBy(x => x.GroupNo == group.GroupNo);
+                Group GroupToUpdate = unitOfWork.GroupRepository.FindBy(x => x.GroupNo == id);
                 IEnumerable<StudentData.GroupType> GroupTypes = unitOfWork.GroupTypeRepository.Find(x => x.GroupTypeDesc != "456");
 
                 List<Models.GroupType> groupTypes = new List<Models.GroupType>();
@@ -194,9 +214,11 @@ namespace WebApplication1.Controllers
                     EndDate = GroupToUpdate.EndDate,
                     SystemDate = (DateTime)GroupToUpdate.SystemDate
                 };
+                ViewBag.ListOfWorkByGroup = ListOfWorkByGroup(GroupToUpdate.GroupNo);
                 return View("ViewEditGroup", groupmodel);
             }
             GroupEdit Dummygroupmodel = new GroupEdit() { GroupNo = 0, GroupDesc = "", GroupPersonNo = 0 };
+            ViewBag.ListOfWorkByGroup = ListOfWorkByGroup(Dummygroupmodel.GroupNo);
             return View("ViewEditGroup", Dummygroupmodel);
         }
 
@@ -238,11 +260,12 @@ namespace WebApplication1.Controllers
             return View("Index", ListOfPersons());
         }
         [HttpPost]
-        public ActionResult AddWork(int GroupNo, string WorkName, int WorkTypeNo,DateTime StartDate,DateTime EndDate)
+        public ActionResult AddWork(int GroupNo, int PersonNo,string WorkName, int WorkTypeNo,DateTime StartDate,DateTime EndDate, GroupEdit group)
         {
             var EntityFmWork = new Work()
             {
-             
+                PersonNo = PersonNo,
+                GroupNo = GroupNo,
                 WorkTypeNo = WorkTypeNo,
                 WorkDesc = WorkName,
                 StartDate = StartDate,
@@ -251,8 +274,11 @@ namespace WebApplication1.Controllers
             };
             unitOfWork.WorkRepository.Add(EntityFmWork);
             unitOfWork.Save();
-            ViewBag.Groups = ListOfWork();
-            return View("AddWork");
+            ViewBag.ListOfWorkByGroup = ListOfWorkByGroup(GroupNo);
+            //GroupEdit Dummygroupmodel = new GroupEdit() { GroupNo = 0, GroupDesc = "", GroupPersonNo = 0 };
+            return View("ViewEditGroup", group);
+
+            //return View("AddWork");
         }
 
         public ActionResult CreateGroup(GroupEdit model)
@@ -271,11 +297,44 @@ namespace WebApplication1.Controllers
             ViewBag.Groups = ListOfGroups();
             return View("CreateGroup");
         }
-        public ActionResult CreateWork(int id)
+        public ActionResult ViewCreateWork(int id)
         {
             ViewBag.ListOfWork = ListOfWork();
             ViewBag.GroupNo = id;
+            ViewBag.PersonNo = 707; /** Get from login **/
             return View(ListOfWork());
+        }
+
+        public ActionResult ViewEditWork(int id,WorkEdit work)
+        {
+            ViewBag.ListOfWorkByGroup = ListOfWorkByGroup(work.GroupNo);
+            ViewBag.GroupNo = work.GroupNo;
+            ViewBag.PersonNo = 707; /** Get from login **/
+
+
+
+            Work WorkToUpdate = unitOfWork.WorkRepository.FindBy(x => x.WorkNo == id);
+            IEnumerable<WorkType> WorkTypes = unitOfWork.WorkTypeRepository.Find(x => x.WorkTypeDesc != "456");
+
+            List<WorkTypeEdit> workTypes = new List<WorkTypeEdit>();
+            foreach (var wtype in WorkTypes)
+            {
+                workTypes.Add(new WorkTypeEdit() { WorkTypeNo = wtype.WorkTypeNo, WorkTypeDesc = wtype.WorkTypeDesc });
+            }
+
+            WorkEdit workmodel = new WorkEdit()
+            {
+                WorkNo = WorkToUpdate.GroupNo,
+                WorkDesc = WorkToUpdate.WorkDesc,
+                WorkTypeNo = WorkToUpdate.WorkTypeNo,
+                StartDate = WorkToUpdate.StartDate,
+                EndDate = WorkToUpdate.EndDate,
+                SystemDate = WorkToUpdate.SystemDate,
+                WorkTypes = workTypes
+            };
+
+
+            return View(workmodel);
         }
     }
 }

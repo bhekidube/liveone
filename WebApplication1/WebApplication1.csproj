@@ -326,7 +326,8 @@
     <Content Include="Views\School\CreateGroup.cshtml" />
     <Content Include="Views\School\ViewEditGroup.cshtml" />
     <Content Include="Views\School\AddWork.cshtml" />
-    <Content Include="Views\School\CreateWork.cshtml" />
+    <Content Include="Views\School\ViewCreateWork.cshtml" />
+    <Content Include="Views\School\ViewEditWork.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

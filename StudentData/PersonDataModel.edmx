@@ -33,6 +33,17 @@
           <Property Name="GroupNo" Type="int" Nullable="false" />
           <Property Name="SystemDate" Type="datetime" />
         </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Institute.dbo.GroupPersonType' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="GroupPersonType">
+          <Key>
+            <PropertyRef Name="GroupPersonTypeNo" />
+          </Key>
+          <Property Name="GroupPersonTypeNo" Type="int" Nullable="false" />
+          <Property Name="GroupPersonTypeDesc" Type="nvarchar" MaxLength="50" />
+          <Property Name="SystemDate" Type="datetime" />
+          <Property Name="CreatedBy" Type="nvarchar" MaxLength="50" />
+        </EntityType>
         <EntityType Name="GroupType">
           <Key>
             <PropertyRef Name="GroupTypeNo" />
@@ -84,7 +95,7 @@
           <Key>
             <PropertyRef Name="WorkNo" />
           </Key>
-          <Property Name="WorkNo" Type="int" Nullable="false" />
+          <Property Name="WorkNo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="WorkDesc" Type="nvarchar" MaxLength="50" />
           <Property Name="WorkTypeNo" Type="int" Nullable="false" />
           <Property Name="GroupNo" Type="int" Nullable="false" />
@@ -101,6 +112,11 @@
           <Property Name="WorkTypeDesc" Type="nvarchar" MaxLength="50" />
           <Property Name="SystemDate" Type="datetime" />
         </EntityType>
+        <Function Name="sp_test_print_out" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="printMessages" Type="varchar(max)" Mode="InOut" />
+        </Function>
+        <Function Name="sp_test_print_out_to_select" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="test_NewGroupMembers" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <EntityContainer Name="InstituteModelStoreContainer">
           <EntitySet Name="Gender" EntityType="Self.Gender" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Group" EntityType="Self.Group" Schema="dbo" store:Type="Tables" />
@@ -112,6 +128,14 @@
           <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Work" EntityType="Self.Work" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="WorkType" EntityType="Self.WorkType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="GroupPersonType" EntityType="Self.GroupPersonType" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [GroupPersonType].[GroupPersonTypeNo] AS [GroupPersonTypeNo], 
+    [GroupPersonType].[GroupPersonTypeDesc] AS [GroupPersonTypeDesc], 
+    [GroupPersonType].[SystemDate] AS [SystemDate], 
+    [GroupPersonType].[CreatedBy] AS [CreatedBy]
+    FROM [dbo].[GroupPersonType] AS [GroupPersonType]</DefiningQuery>
+          </EntitySet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -128,6 +152,12 @@
           <EntitySet Name="Groups" EntityType="InstituteModel.Group" />
           <EntitySet Name="GroupMembers" EntityType="InstituteModel.GroupMember" />
           <EntitySet Name="Works" EntityType="InstituteModel.Work" />
+          <EntitySet Name="GroupPersonTypes" EntityType="InstituteModel.GroupPersonType" />
+          <FunctionImport Name="sp_test_print_out">
+            <Parameter Name="printMessages" Mode="InOut" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_test_print_out_to_select" ReturnType="Collection(String)" />
+          <FunctionImport Name="test_NewGroupMembers" ReturnType="Collection(InstituteModel.test_NewGroupMembers_Result)" />
         </EntityContainer>
         <EntityType Name="Gender">
           <Key>
@@ -225,6 +255,26 @@
           <Property Name="EndDate" Type="DateTime" Precision="3" Nullable="false" />
           <Property Name="SystemDate" Type="DateTime" Precision="3" Nullable="false" />
         </EntityType>
+        <EntityType Name="GroupPersonType">
+          <Key>
+            <PropertyRef Name="GroupPersonTypeNo" />
+          </Key>
+          <Property Name="GroupPersonTypeNo" Type="Int32" Nullable="false" />
+          <Property Name="GroupPersonTypeDesc" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SystemDate" Type="DateTime" Precision="3" />
+          <Property Name="CreatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <ComplexType Name="test_NewGroupMembers_Result">
+          <Property Type="Int32" Name="PersonNo" Nullable="false" />
+          <Property Type="Int32" Name="PersonTypeNo" Nullable="false" />
+          <Property Type="Int32" Name="IdTypeNo" Nullable="false" />
+          <Property Type="String" Name="IdNo" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Surname" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="GenderNo" Nullable="false" />
+          <Property Type="DateTime" Name="DOB" Nullable="false" Precision="23" />
+          <Property Type="DateTime" Name="SystemDate" Nullable="true" Precision="23" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -337,6 +387,33 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="GroupPersonTypes">
+            <EntityTypeMapping TypeName="InstituteModel.GroupPersonType">
+              <MappingFragment StoreEntitySet="GroupPersonType">
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="SystemDate" ColumnName="SystemDate" />
+                <ScalarProperty Name="GroupPersonTypeDesc" ColumnName="GroupPersonTypeDesc" />
+                <ScalarProperty Name="GroupPersonTypeNo" ColumnName="GroupPersonTypeNo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="sp_test_print_out" FunctionName="InstituteModel.Store.sp_test_print_out" />
+          <FunctionImportMapping FunctionImportName="sp_test_print_out_to_select" FunctionName="InstituteModel.Store.sp_test_print_out_to_select" />
+          <FunctionImportMapping FunctionImportName="test_NewGroupMembers" FunctionName="InstituteModel.Store.test_NewGroupMembers">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="InstituteModel.test_NewGroupMembers_Result">
+                <ScalarProperty Name="PersonNo" ColumnName="PersonNo" />
+                <ScalarProperty Name="PersonTypeNo" ColumnName="PersonTypeNo" />
+                <ScalarProperty Name="IdTypeNo" ColumnName="IdTypeNo" />
+                <ScalarProperty Name="IdNo" ColumnName="IdNo" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Surname" ColumnName="Surname" />
+                <ScalarProperty Name="GenderNo" ColumnName="GenderNo" />
+                <ScalarProperty Name="DOB" ColumnName="DOB" />
+                <ScalarProperty Name="SystemDate" ColumnName="SystemDate" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

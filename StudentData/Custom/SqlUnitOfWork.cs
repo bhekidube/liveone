@@ -97,7 +97,7 @@ namespace StudentData.Custom
                 return _workRepository;
             }
         }
-        public GenericRepository<WorkType> WorTypekRepository
+        public GenericRepository<WorkType> WorkTypeRepository
         {
             get
             {
