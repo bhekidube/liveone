@@ -24,7 +24,7 @@
           <Property Name="EndDate" Type="datetime" Nullable="false" />
           <Property Name="SystemDate" Type="datetime" />
         </EntityType>
-        <EntityType Name="GroupMember">
+        <EntityType Name="GroupPerson">
           <Key>
             <PropertyRef Name="GroupMemberNo" />
           </Key>
@@ -120,7 +120,7 @@ warning 6002: The table/view 'Institute.dbo.GroupPersonType' does not have a pri
         <EntityContainer Name="InstituteModelStoreContainer">
           <EntitySet Name="Gender" EntityType="Self.Gender" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Group" EntityType="Self.Group" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="GroupMember" EntityType="Self.GroupMember" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="GroupPerson" EntityType="Self.GroupPerson" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="GroupType" EntityType="Self.GroupType" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="IDType" EntityType="Self.IDType" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Person" EntityType="Self.Person" Schema="dbo" store:Type="Tables" />
@@ -150,14 +150,14 @@ warning 6002: The table/view 'Institute.dbo.GroupPersonType' does not have a pri
           <EntitySet Name="Users" EntityType="InstituteModel.User" />
           <EntitySet Name="WorkTypes" EntityType="InstituteModel.WorkType" />
           <EntitySet Name="Groups" EntityType="InstituteModel.Group" />
-          <EntitySet Name="GroupMembers" EntityType="InstituteModel.GroupMember" />
           <EntitySet Name="Works" EntityType="InstituteModel.Work" />
           <EntitySet Name="GroupPersonTypes" EntityType="InstituteModel.GroupPersonType" />
           <FunctionImport Name="sp_test_print_out">
-            <Parameter Name="printMessages" Mode="InOut" Type="String" />
+          <Parameter Name="printMessages" Mode="InOut" Type="String" />
           </FunctionImport>
           <FunctionImport Name="sp_test_print_out_to_select" ReturnType="Collection(String)" />
           <FunctionImport Name="test_NewGroupMembers" ReturnType="Collection(InstituteModel.test_NewGroupMembers_Result)" />
+          <EntitySet Name="GroupPersons" EntityType="InstituteModel.GroupPerson" />
         </EntityContainer>
         <EntityType Name="Gender">
           <Key>
@@ -233,15 +233,6 @@ warning 6002: The table/view 'Institute.dbo.GroupPersonType' does not have a pri
           <Property Name="EndDate" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="SystemDate" Type="DateTime" Precision="3" />
         </EntityType>
-        <EntityType Name="GroupMember">
-          <Key>
-            <PropertyRef Name="GroupMemberNo" />
-          </Key>
-          <Property Name="GroupMemberNo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="GroupMemberPersonNo" Type="Int32" Nullable="false" />
-          <Property Name="GroupNo" Type="Int32" Nullable="false" />
-          <Property Name="SystemDate" Type="DateTime" Precision="3" />
-        </EntityType>
         <EntityType Name="Work">
           <Key>
             <PropertyRef Name="WorkNo" />
@@ -275,6 +266,15 @@ warning 6002: The table/view 'Institute.dbo.GroupPersonType' does not have a pri
           <Property Type="DateTime" Name="DOB" Nullable="false" Precision="23" />
           <Property Type="DateTime" Name="SystemDate" Nullable="true" Precision="23" />
         </ComplexType>
+        <EntityType Name="GroupPerson">
+          <Key>
+            <PropertyRef Name="GroupMemberNo" />
+          </Key>
+          <Property Name="GroupMemberNo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="GroupMemberPersonNo" Type="Int32" Nullable="false" />
+          <Property Name="GroupNo" Type="Int32" Nullable="false" />
+          <Property Name="SystemDate" Type="DateTime" Precision="3" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -363,16 +363,6 @@ warning 6002: The table/view 'Institute.dbo.GroupPersonType' does not have a pri
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="GroupMembers">
-            <EntityTypeMapping TypeName="InstituteModel.GroupMember">
-              <MappingFragment StoreEntitySet="GroupMember">
-                <ScalarProperty Name="SystemDate" ColumnName="SystemDate" />
-                <ScalarProperty Name="GroupNo" ColumnName="GroupNo" />
-                <ScalarProperty Name="GroupMemberPersonNo" ColumnName="GroupMemberPersonNo" />
-                <ScalarProperty Name="GroupMemberNo" ColumnName="GroupMemberNo" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Works">
             <EntityTypeMapping TypeName="InstituteModel.Work">
               <MappingFragment StoreEntitySet="Work">
@@ -414,6 +404,16 @@ warning 6002: The table/view 'Institute.dbo.GroupPersonType' does not have a pri
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <EntitySetMapping Name="GroupPersons">
+            <EntityTypeMapping TypeName="InstituteModel.GroupPerson">
+              <MappingFragment StoreEntitySet="GroupPerson">
+                <ScalarProperty Name="SystemDate" ColumnName="SystemDate" />
+                <ScalarProperty Name="GroupNo" ColumnName="GroupNo" />
+                <ScalarProperty Name="GroupMemberPersonNo" ColumnName="GroupMemberPersonNo" />
+                <ScalarProperty Name="GroupMemberNo" ColumnName="GroupMemberNo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

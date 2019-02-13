@@ -2,7 +2,8 @@
 using StudentData.Custom;
 using System;
 using System.Collections.Generic;
-using System.Web.Mvc;
+using System.Linq;// Refactor to remove this...make generic
+using System.Web.Mvc;// Refactor to remove this...make generic
 using WebApplication1.Models;
 
 namespace WebApplication1.Controllers
@@ -34,17 +35,31 @@ namespace WebApplication1.Controllers
         //    return View("CreateGroup");
         //}
 
-        public ActionResult AddGroupMember(PersonModelEdit person)
+        public void AddGroupMember(int PersonNo,int GroupNo)
         {
-            var grpMember = new GroupMember()
+            var grpMember = new GroupPerson()
             {
-                GroupMemberPersonNo = person.PersonNo,
-                GroupNo = person.Group,
+                GroupMemberPersonNo = PersonNo,
+                GroupNo = GroupNo,
                 SystemDate = DateTime.Now
             };
-            unitOfWork.GroupMemberRepository.Add(grpMember);
+            var groups = unitOfWork.GroupPersonRepository.Find(x => x.GroupMemberPersonNo == PersonNo).AsEnumerable();
+            var group = groups.Where(x => x.GroupNo == GroupNo).FirstOrDefault();
+            //var groupMember = unitOfWork.GroupPersonRepository.FindBy(x => x.GroupMemberPersonNo == PersonNo);
+            if (group == null)
+                unitOfWork.GroupPersonRepository.Add(grpMember);
             unitOfWork.Save();
-            return View("");
+        }
+
+        public ActionResult DeleteGroupMember(int PersonNo,int GroupNo)
+        {
+            var groupMembers = unitOfWork.GroupPersonRepository.Find(x => x.GroupNo == GroupNo).AsEnumerable();
+            var groupMemberNo = groupMembers.Where(x => x.GroupMemberPersonNo == PersonNo).FirstOrDefault().GroupMemberNo;
+            GroupPerson GroupPersonToDelete = unitOfWork.GroupPersonRepository.FindBy(x => x.GroupMemberNo == groupMemberNo);
+
+            unitOfWork.GroupPersonRepository.Remove(GroupPersonToDelete);
+            unitOfWork.Save();
+            return ViewEditGroup(GroupNo, new GroupEdit());
         }
 
         public ActionResult ViewCreateGroup(GroupEdit model)
@@ -67,6 +82,16 @@ namespace WebApplication1.Controllers
             unitOfWork.GroupRepository.Remove(GroupToDelete);
             unitOfWork.Save();
             return View("CreateGroup", ViewBag.Groups = ListOfGroups());
+        }
+
+        public ActionResult DeleteGroupWork(int WorkNo,int GroupNo)
+        {
+            Work WorkToDelete = unitOfWork.WorkRepository.FindBy(x => x.WorkNo == WorkNo);
+
+            unitOfWork.WorkRepository.Remove(WorkToDelete);
+            unitOfWork.Save();
+            Group group = unitOfWork.GroupRepository.FindBy(x => x.GroupNo == GroupNo);
+            return ViewEditGroup(GroupNo, new GroupEdit());
         }
         private IEnumerable<PersonModelEdit> ListOfPersons()
         {
@@ -134,7 +159,35 @@ namespace WebApplication1.Controllers
             IEnumerable<WorkEdit> en = list;
             return en;
         }
+        private IEnumerable<PersonModelEdit> ListOfWorkMembers(int WorkNo)
+        {
+            List<PersonModelEdit> list = new List<PersonModelEdit>();
+            list.Add(new PersonModelEdit()
+            {
+                Name = "bheki35",
+                Surname = "dube",
+                PersonNo = 1
+            });
+            IEnumerable<PersonModelEdit> en = list;
+            return en;
+        }
+        private IEnumerable<PersonModelEdit> ListOfMembersByGroup(int GroupNo)
+        {
+            List<PersonModelEdit> list = new List<PersonModelEdit>();
+            foreach (var person in unitOfWork.GroupPersonRepository.Find(x => x.GroupNo == GroupNo))
+            {
 
+                var p = unitOfWork.PersonRepository.FindBy(x => x.PersonNo == person.GroupMemberPersonNo);
+                list.Add(new PersonModelEdit()
+                {
+                    Name = p.Name,
+                    Surname = p.Surname,
+                    PersonNo = p.PersonNo
+                });
+            }
+            IEnumerable<PersonModelEdit> en = list;
+            return en;
+        }
         public ActionResult ViewUpdate(PersonModelEdit person)
         {
             if (person != null)
@@ -203,6 +256,8 @@ namespace WebApplication1.Controllers
                     groupTypes.Add(new Models.GroupType() { GroupTypeNo = gtype.GroupTypeNo, GroupTypeDesc = gtype.GroupTypeDesc });
                 }
 
+
+                
                 GroupEdit groupmodel = new GroupEdit()
                 {
                     GroupNo = GroupToUpdate.GroupNo,
@@ -212,13 +267,21 @@ namespace WebApplication1.Controllers
                     GroupTypes = groupTypes,
                     StartDate = GroupToUpdate.StartDate,
                     EndDate = GroupToUpdate.EndDate,
-                    SystemDate = (DateTime)GroupToUpdate.SystemDate
+                    SystemDate = (DateTime)GroupToUpdate.SystemDate,
+                    Persons = ListOfPersons().Select(x=> new SelectListItem { Value = x.PersonNo.ToString(),Text = x.Name}),
+                    SelectedPersonNo = group.SelectedPersonNo
                 };
+                if (groupmodel.SelectedPersonNo != 0)
+                    AddGroupMember(groupmodel.SelectedPersonNo, groupmodel.GroupNo);
                 ViewBag.ListOfWorkByGroup = ListOfWorkByGroup(GroupToUpdate.GroupNo);
+                ViewBag.ListOfmembersByGroup = ListOfMembersByGroup(GroupToUpdate.GroupNo);
+                ViewBag.ListOfPersons = ListOfPersons();
                 return View("ViewEditGroup", groupmodel);
             }
             GroupEdit Dummygroupmodel = new GroupEdit() { GroupNo = 0, GroupDesc = "", GroupPersonNo = 0 };
             ViewBag.ListOfWorkByGroup = ListOfWorkByGroup(Dummygroupmodel.GroupNo);
+            ViewBag.ListOfmembersByGroup = ListOfMembersByGroup(Dummygroupmodel.GroupNo);
+            ViewBag.ListOfPersons = ListOfPersons();
             return View("ViewEditGroup", Dummygroupmodel);
         }
 
@@ -235,10 +298,37 @@ namespace WebApplication1.Controllers
             unitOfWork.Save();
 
             // if Add to group do the below:
-            if (person.AddToGroup == true)
-                AddGroupMember(person);
+            //if (person.AddToGroup == true)
+            //    AddGroupMember(person);
 
             return View("Index", ListOfPersons());
+        }
+        /*
+         *
+         * View members of the group - Done
+         * Add member from current users - Done
+         * Remove a member from group - Done
+         * View marks of class member per work item
+         * ViewEditWork - Fix "Work Name" is shows only part of the name and List of work items below - Done
+         * Generate a text file report for a user and their work.
+         * 
+         */
+
+        public ActionResult ViewPersonDetail(int PersonNo)
+        {
+            Person PersonDetail = unitOfWork.PersonRepository.FindBy(x => x.PersonNo == PersonNo);
+            PersonModelEdit personmodel = new PersonModelEdit()
+            {
+                PersonNo = PersonDetail.PersonNo,
+                Name = PersonDetail.Name,
+                Surname = PersonDetail.Surname,
+                Gender = PersonDetail.GenderNo,
+                ID = PersonDetail.IdNo,
+                IDType = PersonDetail.IdTypeNo,
+                PersonType = PersonDetail.PersonTypeNo,
+                DOB = PersonDetail.DOB
+            };
+            return ViewUpdate(personmodel);
         }
 
         [HttpPost]
@@ -275,10 +365,7 @@ namespace WebApplication1.Controllers
             unitOfWork.WorkRepository.Add(EntityFmWork);
             unitOfWork.Save();
             ViewBag.ListOfWorkByGroup = ListOfWorkByGroup(GroupNo);
-            //GroupEdit Dummygroupmodel = new GroupEdit() { GroupNo = 0, GroupDesc = "", GroupPersonNo = 0 };
-            return View("ViewEditGroup", group);
-
-            //return View("AddWork");
+            return ViewEditGroup(GroupNo, new GroupEdit());
         }
 
         public ActionResult CreateGroup(GroupEdit model)
@@ -310,6 +397,7 @@ namespace WebApplication1.Controllers
             ViewBag.ListOfWorkByGroup = ListOfWorkByGroup(work.GroupNo);
             ViewBag.GroupNo = work.GroupNo;
             ViewBag.PersonNo = 707; /** Get from login **/
+            ViewBag.ListOfWorkMembers = ListOfWorkMembers(work.WorkNo);
 
 
 

@@ -83,16 +83,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="GroupMembers">
-      <EntityTypeMapping TypeName="InstituteModel.GroupMember">
-        <MappingFragment StoreEntitySet="GroupMember">
-          <ScalarProperty Name="SystemDate" ColumnName="SystemDate" />
-          <ScalarProperty Name="GroupNo" ColumnName="GroupNo" />
-          <ScalarProperty Name="GroupMemberPersonNo" ColumnName="GroupMemberPersonNo" />
-          <ScalarProperty Name="GroupMemberNo" ColumnName="GroupMemberNo" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="Works">
       <EntityTypeMapping TypeName="InstituteModel.Work">
         <MappingFragment StoreEntitySet="Work">
@@ -134,5 +124,15 @@
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
+    <EntitySetMapping Name="GroupPersons">
+      <EntityTypeMapping TypeName="InstituteModel.GroupPerson">
+        <MappingFragment StoreEntitySet="GroupPerson">
+          <ScalarProperty Name="SystemDate" ColumnName="SystemDate" />
+          <ScalarProperty Name="GroupNo" ColumnName="GroupNo" />
+          <ScalarProperty Name="GroupMemberPersonNo" ColumnName="GroupMemberPersonNo" />
+          <ScalarProperty Name="GroupMemberNo" ColumnName="GroupMemberNo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

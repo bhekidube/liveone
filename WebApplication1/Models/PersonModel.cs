@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 
 namespace WebApplication1.Models
 {
@@ -51,6 +52,8 @@ namespace WebApplication1.Models
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
         public DateTime SystemDate { get; set; }
+        public int SelectedPersonNo { get; set; }
+        public IEnumerable<SelectListItem> Persons { get; set; }
         public IEnumerable<GroupType> GroupTypes { get; set; }
     }
     public class WorkEdit

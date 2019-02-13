@@ -12,7 +12,7 @@
             {
             <div>
                 <input type="hidden" name="PersonNo" value=@Model.GroupNo />
-                Group Name    <input type="text" name="Name" value=@Model.GroupDesc /><br>
+                Group Name    <input type="text" name="Name" value="@Model.GroupDesc" /><br>
                 <div>
                     Group Type
                     @Html.DropDownListFor(model => model.GroupType, new SelectList(Model.GroupTypes, "GroupTypeNo", "GroupTypeDesc", "-- Select Group Type --"))
@@ -25,7 +25,8 @@
 
                     <input type="submit" value="Save changes" class="btn-primary"><br /><br />
                 </div>
-                @Html.ActionLink("Add work", "ViewCreateWork", "School", new { id = Model.GroupNo }, null)
+                @Html.ActionLink("Add work", "ViewCreateWork", "School", new { id = Model.GroupNo }, null)<br>
+                @Html.DropDownListFor(x => x.SelectedPersonNo, Model.Persons)
             </div>
         }
     </section>
@@ -54,7 +55,25 @@
                     @element.EndDate
                 </td>
                 <td>
-                    @Html.ActionLink("Remove", "DeleteWork", "School", new { id = element.WorkNo }, null)
+                    @Html.ActionLink("Remove", "DeleteGroupWork", "School", new { WorkNo = element.WorkNo, GroupNo = @Model.GroupNo }, null)
+                </td>
+            </tr>
+        }
+    </table>
+
+    <table>
+        @if (ViewBag.ListOfmembersByGroup.Count > 0)
+        {
+            <tr>
+                <td>Member name</td>
+            </tr>        }
+        @foreach (var element in (List<WebApplication1.Models.PersonModelEdit>)ViewBag.ListOfmembersByGroup)
+        {
+
+            <tr>
+                <td>@Html.ActionLink(element.Name + " " + element.Surname, "ViewPersonDetail", "School", new { PersonNo = element.PersonNo }, null)</td>
+                <td>
+                    @Html.ActionLink("Delete member", "DeleteGroupMember", "School", new { PersonNo = element.PersonNo, GroupNo = @Model.GroupNo }, null)
                 </td>
             </tr>
         }

@@ -19,7 +19,7 @@
     <Property Name="EndDate" Type="datetime" Nullable="false" />
     <Property Name="SystemDate" Type="datetime" />
   </EntityType>
-  <EntityType Name="GroupMember">
+  <EntityType Name="GroupPerson">
     <Key>
       <PropertyRef Name="GroupMemberNo" />
     </Key>
@@ -115,7 +115,7 @@ warning 6002: The table/view 'Institute.dbo.GroupPersonType' does not have a pri
   <EntityContainer Name="InstituteModelStoreContainer">
     <EntitySet Name="Gender" EntityType="Self.Gender" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Group" EntityType="Self.Group" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="GroupMember" EntityType="Self.GroupMember" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="GroupPerson" EntityType="Self.GroupPerson" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="GroupType" EntityType="Self.GroupType" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="IDType" EntityType="Self.IDType" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Person" EntityType="Self.Person" Schema="dbo" store:Type="Tables" />

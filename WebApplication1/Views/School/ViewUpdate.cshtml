@@ -11,8 +11,8 @@
             {
             <div>
                 <input type="hidden" name="PersonNo" value=@Model.PersonNo />
-                Name    <input type="text" name="Name" value=@Model.Name /><br>
-                Surname <input type="text" name="Surname" value=@Model.Surname /><br>
+                Name    <input type="text" name="Name" value="@Model.Name" /><br>
+                Surname <input type="text" name="Surname" value="@Model.Surname" /><br>
                 DOB @Html.TextBoxFor(model => model.DOB,
                     new { @type = "date", @Value = Model.DOB.ToString("yyyy-MM-dd") })
                 <div class="form-group">

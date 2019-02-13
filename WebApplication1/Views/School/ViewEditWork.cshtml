@@ -12,7 +12,7 @@
             {
             <div>
                 <input type="hidden" name="PersonNo" value=@Model.WorkNo />
-                Work Name    <input type="text" name="Name" value=@Model.WorkDesc /><br>
+                Work Name    <input type="text" name="Name" value="@Model.WorkDesc" /><br>
                 <div>
                     Work Type
                     @*@Html.DropDownListFor(model => model.WorkTypeNo, new SelectList(Model.WorkTypes, "WorkTypeNo", "WorkTypeDesc", "-- Select Work Type --"))*@
@@ -53,7 +53,28 @@
                     @element.EndDate
                 </td>
                 <td>
-                    @Html.ActionLink("Remove", "DeleteWork", "School", new { id = element.WorkNo }, null)
+                    @Html.ActionLink("Remove", "DeleteGroupWork", "School", new { id = element.WorkNo, GroupNo = Model.GroupNo }, null)
+                </td>
+            </tr>
+        }
+    </table>
+
+
+    <table>
+        @if (ViewBag.ListOfWorkMembers.Count > 0)
+        {
+            <tr>
+                <td>Member name</td>
+                <td>Mark</td>
+            </tr>        }
+        @foreach (var element in (List<WebApplication1.Models.PersonModelEdit>)ViewBag.ListOfWorkMembers)
+        {
+
+            <tr>
+                <td>@Html.ActionLink(element.Name + " " + element.Surname, "ViewPersonDetail", "School", new { PersonNo = element.PersonNo }, null)</td>
+                <td><input type="text" name="Mark" value="element.Mark"></td>
+                <td>
+                    @Html.ActionLink("Delete member", "DeleteGroupMember", "School", new { PersonNo = element.PersonNo, GroupNo = @Model.GroupNo }, null)
                 </td>
             </tr>
         }

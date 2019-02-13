@@ -12,9 +12,10 @@ namespace StudentData.Custom
         private GenericRepository<IDType> _idTypeRepository;
         private GenericRepository<GroupType> _groupTypeRepository;
         private GenericRepository<Group> _groupRepository;
-        private GenericRepository<GroupMember> _groupMemberRepository;
         private GenericRepository<Work> _workRepository;
         private GenericRepository<WorkType> _workTypeRepository;
+        private GenericRepository<GroupPerson> _groupPersonRepository;
+
 
 
         public GenericRepository<Person> PersonRepository
@@ -37,6 +38,18 @@ namespace StudentData.Custom
                     _personTypeRepository = new GenericRepository<PersonType>(_context.ObjectContext);
                 }
                 return _personTypeRepository;
+            }
+        }
+
+        public GenericRepository<GroupPerson> GroupPersonRepository
+        {
+            get
+            {
+                if (_groupPersonRepository == null)
+                {
+                    _groupPersonRepository = new GenericRepository<GroupPerson>(_context.ObjectContext);
+                }
+                return _groupPersonRepository;
             }
         }
         public GenericRepository<IDType> IdTypeRepository
@@ -74,17 +87,17 @@ namespace StudentData.Custom
             }
         }
 
-        public GenericRepository<GroupMember> GroupMemberRepository
-        {
-            get
-            {
-                if (_groupMemberRepository == null)
-                {
-                    _groupMemberRepository = new GenericRepository<GroupMember>(_context.ObjectContext);
-                }
-                return _groupMemberRepository;
-            }
-        }
+        //public GenericRepository<GroupMember> GroupMemberRepository
+        //{
+        //    get
+        //    {
+        //        if (_groupMemberRepository == null)
+        //        {
+        //            _groupMemberRepository = new GenericRepository<GroupMember>(_context.ObjectContext);
+        //        }
+        //        return _groupMemberRepository;
+        //    }
+        //}
 
         public GenericRepository<Work> WorkRepository
         {

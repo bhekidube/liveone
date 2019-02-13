@@ -9,7 +9,6 @@
     <EntitySet Name="Users" EntityType="InstituteModel.User" />
     <EntitySet Name="WorkTypes" EntityType="InstituteModel.WorkType" />
     <EntitySet Name="Groups" EntityType="InstituteModel.Group" />
-    <EntitySet Name="GroupMembers" EntityType="InstituteModel.GroupMember" />
     <EntitySet Name="Works" EntityType="InstituteModel.Work" />
     <EntitySet Name="GroupPersonTypes" EntityType="InstituteModel.GroupPersonType" />
     <FunctionImport Name="sp_test_print_out">
@@ -17,6 +16,7 @@
     </FunctionImport>
     <FunctionImport Name="sp_test_print_out_to_select" ReturnType="Collection(String)" />
     <FunctionImport Name="test_NewGroupMembers" ReturnType="Collection(InstituteModel.test_NewGroupMembers_Result)" />
+    <EntitySet Name="GroupPersons" EntityType="InstituteModel.GroupPerson" />
   </EntityContainer>
   <EntityType Name="Gender">
     <Key>
@@ -92,15 +92,6 @@
     <Property Name="EndDate" Type="DateTime" Nullable="false" Precision="3" />
     <Property Name="SystemDate" Type="DateTime" Precision="3" />
   </EntityType>
-  <EntityType Name="GroupMember">
-    <Key>
-      <PropertyRef Name="GroupMemberNo" />
-    </Key>
-    <Property Name="GroupMemberNo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="GroupMemberPersonNo" Type="Int32" Nullable="false" />
-    <Property Name="GroupNo" Type="Int32" Nullable="false" />
-    <Property Name="SystemDate" Type="DateTime" Precision="3" />
-  </EntityType>
   <EntityType Name="Work">
     <Key>
       <PropertyRef Name="WorkNo" />
@@ -134,4 +125,13 @@
     <Property Type="DateTime" Name="DOB" Nullable="false" Precision="23" />
     <Property Type="DateTime" Name="SystemDate" Nullable="true" Precision="23" />
   </ComplexType>
+  <EntityType Name="GroupPerson">
+    <Key>
+      <PropertyRef Name="GroupMemberNo" />
+    </Key>
+    <Property Name="GroupMemberNo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="GroupMemberPersonNo" Type="Int32" Nullable="false" />
+    <Property Name="GroupNo" Type="Int32" Nullable="false" />
+    <Property Name="SystemDate" Type="DateTime" Precision="3" />
+  </EntityType>
 </Schema>
