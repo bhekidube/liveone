@@ -38,6 +38,9 @@ namespace StudentData
         public virtual DbSet<Work> Works { get; set; }
         public virtual DbSet<GroupPersonType> GroupPersonTypes { get; set; }
         public virtual DbSet<GroupPerson> GroupPersons { get; set; }
+        public virtual DbSet<MarkResult> MarkResults { get; set; }
+        public virtual DbSet<ResultType> ResultTypes { get; set; }
+        public virtual DbSet<WorkPersonResult> WorkPersonResults { get; set; }
     
         public virtual int sp_test_print_out(ObjectParameter printMessages)
         {

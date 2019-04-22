@@ -15,6 +15,7 @@ namespace StudentData.Custom
         private GenericRepository<Work> _workRepository;
         private GenericRepository<WorkType> _workTypeRepository;
         private GenericRepository<GroupPerson> _groupPersonRepository;
+        private GenericRepository<WorkPersonResult> _workPersonResultRepository;
 
 
 
@@ -119,6 +120,17 @@ namespace StudentData.Custom
                     _workTypeRepository = new GenericRepository<WorkType>(_context.ObjectContext);
                 }
                 return _workTypeRepository;
+            }
+        }
+        public GenericRepository<WorkPersonResult> WorkResultRepository
+        {
+            get
+            {
+                if (_workPersonResultRepository == null)
+                {
+                    _workPersonResultRepository = new GenericRepository<WorkPersonResult>(_context.ObjectContext);
+                }
+                return _workPersonResultRepository;
             }
         }
         public void Save()

@@ -6,6 +6,10 @@ using System.Web.Mvc;
 
 namespace WebApplication1.Models
 {
+    public class WorkPersonModelEdit : PersonModelEdit
+    {
+        public int PersonMark;
+    }
     public class PersonModelEdit
     {
         public int PersonNo { get; set; }

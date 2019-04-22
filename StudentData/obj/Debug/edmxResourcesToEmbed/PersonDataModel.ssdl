@@ -28,8 +28,6 @@
     <Property Name="GroupNo" Type="int" Nullable="false" />
     <Property Name="SystemDate" Type="datetime" />
   </EntityType>
-  <!--Errors Found During Generation:
-warning 6002: The table/view 'Institute.dbo.GroupPersonType' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
   <EntityType Name="GroupPersonType">
     <Key>
       <PropertyRef Name="GroupPersonTypeNo" />
@@ -55,6 +53,16 @@ warning 6002: The table/view 'Institute.dbo.GroupPersonType' does not have a pri
     <Property Name="IDTypeNo" Type="int" Nullable="false" />
     <Property Name="IDTypeDesc" Type="nvarchar" MaxLength="50" />
   </EntityType>
+  <EntityType Name="MarkResult">
+    <Key>
+      <PropertyRef Name="MarkResultNo" />
+    </Key>
+    <Property Name="MarkResultNo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="MarkResultValue" Type="float" />
+    <Property Name="MarkResultTotal" Type="float" />
+    <Property Name="CreatedBy" Type="nvarchar" MaxLength="50" />
+    <Property Name="SystemDate" Type="datetime" />
+  </EntityType>
   <EntityType Name="Person">
     <Key>
       <PropertyRef Name="PersonNo" />
@@ -75,6 +83,15 @@ warning 6002: The table/view 'Institute.dbo.GroupPersonType' does not have a pri
     </Key>
     <Property Name="PersonTypeNo" Type="int" Nullable="false" />
     <Property Name="PersonTypeDesc" Type="nvarchar" MaxLength="50" />
+    <Property Name="SystemDate" Type="datetime" />
+    <Property Name="CreatedBy" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="ResultType">
+    <Key>
+      <PropertyRef Name="ResultTypeNo" />
+    </Key>
+    <Property Name="ResultTypeNo" Type="int" Nullable="false" />
+    <Property Name="ResultTypeDesc" Type="nvarchar" MaxLength="50" />
     <Property Name="SystemDate" Type="datetime" />
     <Property Name="CreatedBy" Type="nvarchar" MaxLength="50" />
   </EntityType>
@@ -99,6 +116,17 @@ warning 6002: The table/view 'Institute.dbo.GroupPersonType' does not have a pri
     <Property Name="EndDate" Type="datetime" Nullable="false" />
     <Property Name="SystemDate" Type="datetime" Nullable="false" />
   </EntityType>
+  <EntityType Name="WorkPersonResult">
+    <Key>
+      <PropertyRef Name="WorkPersonResultNo" />
+    </Key>
+    <Property Name="WorkPersonResultNo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="WorkNo" Type="int" Nullable="false" />
+    <Property Name="PersonNo" Type="int" Nullable="false" />
+    <Property Name="ResultNo" Type="int" Nullable="false" />
+    <Property Name="ResultType" Type="int" Nullable="false" />
+    <Property Name="SystemDate" Type="datetime" Nullable="false" />
+  </EntityType>
   <EntityType Name="WorkType">
     <Key>
       <PropertyRef Name="WorkTypeNo" />
@@ -116,20 +144,16 @@ warning 6002: The table/view 'Institute.dbo.GroupPersonType' does not have a pri
     <EntitySet Name="Gender" EntityType="Self.Gender" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Group" EntityType="Self.Group" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="GroupPerson" EntityType="Self.GroupPerson" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="GroupPersonType" EntityType="Self.GroupPersonType" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="GroupType" EntityType="Self.GroupType" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="IDType" EntityType="Self.IDType" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="MarkResult" EntityType="Self.MarkResult" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Person" EntityType="Self.Person" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="PersonType" EntityType="Self.PersonType" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ResultType" EntityType="Self.ResultType" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Work" EntityType="Self.Work" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="WorkPersonResult" EntityType="Self.WorkPersonResult" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="WorkType" EntityType="Self.WorkType" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="GroupPersonType" EntityType="Self.GroupPersonType" store:Type="Tables" store:Schema="dbo">
-      <DefiningQuery>SELECT 
-    [GroupPersonType].[GroupPersonTypeNo] AS [GroupPersonTypeNo], 
-    [GroupPersonType].[GroupPersonTypeDesc] AS [GroupPersonTypeDesc], 
-    [GroupPersonType].[SystemDate] AS [SystemDate], 
-    [GroupPersonType].[CreatedBy] AS [CreatedBy]
-    FROM [dbo].[GroupPersonType] AS [GroupPersonType]</DefiningQuery>
-    </EntitySet>
   </EntityContainer>
 </Schema>

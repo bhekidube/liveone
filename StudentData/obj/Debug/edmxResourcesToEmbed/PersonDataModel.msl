@@ -134,5 +134,38 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="MarkResults">
+      <EntityTypeMapping TypeName="InstituteModel.MarkResult">
+        <MappingFragment StoreEntitySet="MarkResult">
+          <ScalarProperty Name="SystemDate" ColumnName="SystemDate" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="MarkResultTotal" ColumnName="MarkResultTotal" />
+          <ScalarProperty Name="MarkResultValue" ColumnName="MarkResultValue" />
+          <ScalarProperty Name="MarkResultNo" ColumnName="MarkResultNo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ResultTypes">
+      <EntityTypeMapping TypeName="InstituteModel.ResultType">
+        <MappingFragment StoreEntitySet="ResultType">
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="SystemDate" ColumnName="SystemDate" />
+          <ScalarProperty Name="ResultTypeDesc" ColumnName="ResultTypeDesc" />
+          <ScalarProperty Name="ResultTypeNo" ColumnName="ResultTypeNo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="WorkPersonResults">
+      <EntityTypeMapping TypeName="InstituteModel.WorkPersonResult">
+        <MappingFragment StoreEntitySet="WorkPersonResult">
+          <ScalarProperty Name="SystemDate" ColumnName="SystemDate" />
+          <ScalarProperty Name="ResultType" ColumnName="ResultType" />
+          <ScalarProperty Name="ResultNo" ColumnName="ResultNo" />
+          <ScalarProperty Name="PersonNo" ColumnName="PersonNo" />
+          <ScalarProperty Name="WorkNo" ColumnName="WorkNo" />
+          <ScalarProperty Name="WorkPersonResultNo" ColumnName="WorkPersonResultNo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

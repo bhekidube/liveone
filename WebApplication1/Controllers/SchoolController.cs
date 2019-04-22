@@ -159,16 +159,26 @@ namespace WebApplication1.Controllers
             IEnumerable<WorkEdit> en = list;
             return en;
         }
-        private IEnumerable<PersonModelEdit> ListOfWorkMembers(int WorkNo)
+        private IEnumerable<WorkPersonModelEdit> ListOfWorkMembers(int WorkNo)
         {
-            List<PersonModelEdit> list = new List<PersonModelEdit>();
-            list.Add(new PersonModelEdit()
+            var results = unitOfWork.WorkResultRepository.Find(x=>x.WorkNo == WorkNo);
+            List<WorkPersonModelEdit> list = new List<WorkPersonModelEdit>();
+            foreach (var r in results)
             {
-                Name = "bheki35",
-                Surname = "dube",
-                PersonNo = 1
-            });
-            IEnumerable<PersonModelEdit> en = list;
+                var person = unitOfWork.PersonRepository.FindBy(x => x.PersonNo == r.PersonNo);
+
+
+                list.Add(new WorkPersonModelEdit()
+                {
+                
+                    Name = person.Name,
+                    Surname = person.Surname,
+                    PersonNo = person.PersonNo,
+                    PersonMark = r.ResultNo
+                });
+
+            }
+            IEnumerable<WorkPersonModelEdit> en = list;
             return en;
         }
         private IEnumerable<PersonModelEdit> ListOfMembersByGroup(int GroupNo)
@@ -393,6 +403,39 @@ namespace WebApplication1.Controllers
         }
 
         public ActionResult ViewEditWork(int id,WorkEdit work)
+        {
+            ViewBag.ListOfWorkByGroup = ListOfWorkByGroup(id);
+            ViewBag.GroupNo = work.GroupNo;
+            ViewBag.PersonNo = 707; /** Get from login **/
+            ViewBag.ListOfWorkMembers = ListOfWorkMembers(id);
+
+
+
+            Work WorkToUpdate = unitOfWork.WorkRepository.FindBy(x => x.WorkNo == id);
+            IEnumerable<WorkType> WorkTypes = unitOfWork.WorkTypeRepository.Find(x => x.WorkTypeDesc != "456");
+
+            List<WorkTypeEdit> workTypes = new List<WorkTypeEdit>();
+            foreach (var wtype in WorkTypes)
+            {
+                workTypes.Add(new WorkTypeEdit() { WorkTypeNo = wtype.WorkTypeNo, WorkTypeDesc = wtype.WorkTypeDesc });
+            }
+
+            WorkEdit workmodel = new WorkEdit()
+            {
+                WorkNo = WorkToUpdate.GroupNo,
+                WorkDesc = WorkToUpdate.WorkDesc,
+                WorkTypeNo = WorkToUpdate.WorkTypeNo,
+                StartDate = WorkToUpdate.StartDate,
+                EndDate = WorkToUpdate.EndDate,
+                SystemDate = WorkToUpdate.SystemDate,
+                WorkTypes = workTypes
+            };
+
+
+            return View(workmodel);
+        }
+
+        public ActionResult ViewEditWorkDetail(int id, WorkEdit work)
         {
             ViewBag.ListOfWorkByGroup = ListOfWorkByGroup(work.GroupNo);
             ViewBag.GroupNo = work.GroupNo;

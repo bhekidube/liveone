@@ -16,6 +16,9 @@
         <EntityTypeShape EntityType="InstituteModel.Work" Width="1.5" PointX="8.375" PointY="3.75" />
         <EntityTypeShape EntityType="InstituteModel.GroupPersonType" Width="1.5" PointX="9.375" PointY="7.75" />
         <EntityTypeShape EntityType="InstituteModel.GroupPerson" Width="1.5" PointX="10.375" PointY="0.75" />
+        <EntityTypeShape EntityType="InstituteModel.MarkResult" Width="1.5" PointX="0.75" PointY="10.75" />
+        <EntityTypeShape EntityType="InstituteModel.ResultType" Width="1.5" PointX="2.75" PointY="10.75" />
+        <EntityTypeShape EntityType="InstituteModel.WorkPersonResult" Width="1.5" PointX="10.75" PointY="3.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

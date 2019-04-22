@@ -7,7 +7,7 @@
     <WebStackScaffolding_IsPartialViewSelected>True</WebStackScaffolding_IsPartialViewSelected>
     <WebStackScaffolding_IsReferencingScriptLibrariesSelected>False</WebStackScaffolding_IsReferencingScriptLibrariesSelected>
     <WebStackScaffolding_LayoutPageFile>~/Views/Shared/_Layout.cshtml</WebStackScaffolding_LayoutPageFile>
-    <NameOfLastUsedPublishProfile>topcaves - Web Deploy</NameOfLastUsedPublishProfile>
+    <NameOfLastUsedPublishProfile>bheki</NameOfLastUsedPublishProfile>
     <WebStackScaffolding_ControllerDialogWidth>600</WebStackScaffolding_ControllerDialogWidth>
     <WebStackScaffolding_IsAsyncSelected>False</WebStackScaffolding_IsAsyncSelected>
     <WebStackScaffolding_DbContextTypeFullName>StudentData.InstituteEntities</WebStackScaffolding_DbContextTypeFullName>
